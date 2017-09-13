@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Youtubeoke</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="embed-responsive embed-responsive-16by9">
+					<div id="player"></div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#search">Search</a></li>
+					<li><a data-toggle="tab" href="#play-list">Playlist</a></li>
+					<li><a data-toggle="tab" href="#recent">Recent</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div id="play-list" class="tab-pane fade">
+						<br>
+						<h4>Now playing</h4>
+						<ul id="now-playing-list" class="list-group"></ul>
+						<br>
+						<ul id="play-list-items" class="list-group"></ul>
+					</div>
+					<div id="recent" class="tab-pane fade">
+						<h3>Recent</h3>
+					</div>
+					<div id="search" class="tab-pane fade in active">
+						<br>
+						<form id="search-form" action="https://www.googleapis.com/youtube/v3/search" class="form">
+							<div class="input-group">
+								<input name="q" type="text" class="form-control" placeholder="Search for...">
+								<span class="input-group-btn"><button class="btn btn-default">Go!</button></span>
+							</div>
+							<input type="hidden" name="part" value="snippet">
+							<input type="hidden" name="key" value="AIzaSyCc-Ig4WkasVymPRqJbxnr7mF7NXLZPk84">
+							<input type="hidden" name="maxResults" value="50">
+							<input type="hidden" name="type" value="video">
+						</form>
+						<br>
+						<ul id="search-list" class="list-group"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="player.js"></script>
+	<script src="search.js"></script>
+	<script src="playlist.js"></script>
+</body>
+
+</html>
