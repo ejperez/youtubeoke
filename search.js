@@ -32,18 +32,21 @@ var Search = {};
 		Search.searchList = $("ul#search-list");
 
 		// Initialize search form
-		searchForm = $('#search-form');
+		var searchForm = $('#search-form');
+		var searchFormFieldset = $('#search-form fieldset');
 		searchForm.on('submit', function (e) {
 			e.preventDefault();
+			var formData = searchForm.serialize();
+			searchFormFieldset.prop('disabled', true);
 
 			$.getJSON(
 				searchForm.prop('action'),
-				searchForm.serialize()
+				formData
 			).done(function (result) {
 				Search.printResults(result);
+				searchFormFieldset.prop('disabled', false);
 			}).fail(function (result) {
-				var err = textStatus + ", " + error;
-				console.log("Request Failed: " + err);
+				console.error(result);
 			});
 		});
 
@@ -55,7 +58,27 @@ var Search = {};
 				Playlist.add(item);
 			}
 		});
-	};
 
-	$(Search.init);
+		// Resize the lists to keep the video in viewport
+		var searchListContainer = $('#search-list-container');
+		var timeout;
+		var resizeList = function () {
+			var newHeight = Player.iframe.height();
+			searchListContainer.css({
+				overflowY: 'scroll',
+				overflowX: 'hidden',
+				overflow: 'auto',
+				height: newHeight
+			});
+		}
+
+		// Add throttling
+		$(window).resize(function(){
+			clearTimeout(timeout);
+			timeout = setTimeout(resizeList, 100);
+		});
+
+		// Initiate list height
+		resizeList();
+	};
 })(jQuery);

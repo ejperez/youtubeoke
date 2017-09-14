@@ -1,34 +1,59 @@
-// 2. This code loads the IFrame Player API code asynchronously.
-var tag = document.createElement('script');
+var Player = {};
 
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+(function ($) {
+	var player;
+	var tag = document.createElement('script');
 
-// 3. This function creates an <iframe> (and YouTube player)
-//    after the API code downloads.
-var player;
-function onYouTubeIframeAPIReady() {
-	player = new YT.Player('player', {
-		height: '390',
-		width: '640',
-		events: {
-			'onReady': onPlayerReady,
-			'onStateChange': onPlayerStateChange
-		}
-	});
-}
+	tag.src = "https://www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// 4. The API will call this function when the video player is ready.
-function onPlayerReady(event) {
-	$('#player').addClass('embed-responsive-item');	
-}
+	Player.onPlayerReady = function (event) {
+		Player.iframe = $('#player');
+		Player.iframe.addClass('embed-responsive-item');
 
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
-function onPlayerStateChange(event) {
-	if (event.data == YT.PlayerState.ENDED) {
-		
+		// Initiate search and playlist
+		Search.init();
+		Playlist.init();
+
+		// Hide welcome screen
+		$('#welcome').fadeOut(400);
 	}
+
+	Player.onPlayerStateChange = function (event) {
+		if (event.data == YT.PlayerState.ENDED) {
+			if (Playlist.hasNextItem()) {
+				// Play the first item in the list
+				Playlist.setNowPlaying(0);
+			}
+		}
+	}
+
+	Player.init = function () {
+		if (typeof (Player.player) === 'undefined') {
+			player = new YT.Player('player', {
+				height: '390',
+				width: '640',
+				events: {
+					'onReady': Player.onPlayerReady,
+					'onStateChange': Player.onPlayerStateChange
+				},
+				playerVars: {
+					rel: 0,
+					showinfo: 0
+				}
+			});
+		}
+	};
+
+	Player.play = function (videoId) {
+		player.loadVideoById({
+			videoId: videoId,
+			rel: 0
+		});
+	};
+})(jQuery);
+
+function onYouTubeIframeAPIReady() {
+	Player.init();
 }
