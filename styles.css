@@ -1,7 +1,7 @@
 body {
 	background: #000;
 	color: #fff;
-	background: url('bg.jpg');
+	background: url('bg.jpg') #000;
 	background-size: cover;
 	background-attachment: fixed;
 	overflow: hidden;
