@@ -101,7 +101,7 @@ var Playlist = {};
 		html += '<h4 class="media-heading">' + data.snippet.title + '</h4>';
 		html += '<p>' + data.snippet.channelTitle + '</p><p>';
 		html += '<button type="button" data-index="' + index + '" class="js-play-now btn btn-primary btn-xs">Play now</button>';
-		html += '&nbsp;<button type="button" data-index="' + index + '" class="js-remove btn btn-danger btn-xs">Play now</button>';
+		html += '&nbsp;<button type="button" data-index="' + index + '" class="js-remove btn btn-danger btn-xs">Remove</button>';
 		html += '</p></div></div></li>';
 
 		return html;
