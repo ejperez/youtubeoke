@@ -12,6 +12,7 @@ var Search = {};
 			});
 
 			Search.searchList.html(allHtml);
+			Search.searchListContainer.prop('scrollTop', 0);
 		}
 	};
 
@@ -70,11 +71,11 @@ var Search = {};
 		});
 
 		// Resize the lists to keep the video in viewport
-		var searchListContainer = $('#search-list-container');
+		Search.searchListContainer = $('#search-list-container');
 		var timeout;
 		var resizeList = function () {
 			var newHeight = Player.iframe.height();
-			searchListContainer.css({
+			Search.searchListContainer.css({
 				overflowY: 'scroll',
 				overflowX: 'hidden',
 				overflow: 'auto',
