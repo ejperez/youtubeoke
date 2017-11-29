@@ -77,7 +77,16 @@ ul.nav.nav-tabs li.active a {
 	background-color: inherit;
 }
 
+ul.nav.nav-tabs li {
+	background-color: rgba(0, 0, 0, 0.55);
+}
+
 .badge {
 	background-color: #fff;
 	color: #000;
+}
+
+.img-responsive {
+	border: solid 1px #fff;
+	margin-bottom: 5px;
 }

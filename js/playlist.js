@@ -95,9 +95,9 @@ var Playlist = {};
 
 	Playlist.getSingleItemHTML = function (index, data) {
 		var html = '<li class="list-group-item">';
-		html += '<div class="media"><div class="media-left">';
-		html += '<img class="media-object" src="' + data.snippet.thumbnails.default.url + '" alt="" width="120" height="90">';
-		html += '</div><div class="media-body">';
+		html += '<div class="media">';
+		html += '<img class="img-responsive" src="' + data.snippet.thumbnails.medium.url + '" alt="">';
+		html += '<div class="media-body">';
 		html += '<h4 class="media-heading">' + data.snippet.title + '</h4>';
 		html += '<p>' + data.snippet.channelTitle + '</p><p>';
 		html += '<button type="button" data-index="' + index + '" class="js-play-now btn btn-primary btn-xs">Play now</button>';
