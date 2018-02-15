@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Online Videoke">
+    <meta name="author" content="EJ Perez">
+
+    <title>Youtubeoke | Online Videoke</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper" v-bind:class="{ toggled: isSideMenuShown }">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">Youtubeoke</a>
+            </li>
+            <li>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#" v-on:click="activeTab = 1">Search</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#" v-on:click="activeTab = 2">Playlist ({{ this.playlistCount }})</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane" v-bind:class="{ active: activeTab === 1}">
+                        <search-component :list="searchResults" v-on:add-to-playlist="addToPlaylist"></search-component>
+                    </div>
+                    <div id="menu1" class="tab-pane" v-bind:class="{ active: activeTab === 2}">
+                        <playlist-component :list="playlist"
+                                            v-on:play-now="console.log('play now')"
+                                            v-on:delete-item="console.log('delete')"></playlist-component>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <h1>Simple Sidebar</h1>
+
+            <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens,
+                and will appear non-collapsed on larger screens. When toggled using the button below, the menu will
+                appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+
+            <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+
+            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"
+               v-on:click="isSideMenuShown = !isSideMenuShown">Toggle Menu</a>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script type="text/x-template" id="search-component-template">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="https://www.googleapis.com/youtube/v3/search" class="form">
+                    <fieldset>
+                        <div class="input-group">
+                            <input name="q" type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn"><button class="btn btn-default">Go!</button></span>
+                        </div>
+                        <input type="hidden" name="part" value="snippet">
+                        <input type="hidden" name="key" value="AIzaSyCc-Ig4WkasVymPRqJbxnr7mF7NXLZPk84">
+                        <input type="hidden" name="maxResults" value="50">
+                        <input type="hidden" name="type" value="video">
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-md-12">
+                <ul>
+                    <li v-for="item in list">
+                        <img v-bind:src="item.image" alt=""/>
+
+                        <p>{{ item.title }}</p>
+
+                        <p>{{ item.channel }}</p>
+
+                        <button v-on:click="addToPlaylist(item)">Add to playlist</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-template" id="playlist-component-template">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li v-for="item in list">
+                        <img v-bind:src="item.image" alt=""/>
+
+                        <p>{{ item.title }}</p>
+
+                        <p>{{ item.channel }}</p>
+
+                        <button v-on:click="playNow(item)">Play now</button>
+                        <button v-on:click="deleteItem(item)">Delete</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+
+    var searchComponent = {
+        template: '#search-component-template',
+        props: [ 'list' ],
+        methods: {
+            addToPlaylist: function ( item ) {
+                this.$emit( 'add-to-playlist', item );
+            }
+        }
+    };
+
+    var playlistComponent = {
+        template: '#playlist-component-template',
+        props: [ 'list' ],
+        methods: {
+            playNow: function ( item ) {
+                this.$emit( 'play-now', item );
+            },
+            deleteItem: function ( item ) {
+                this.$emit( 'delete-item', item );
+            }
+        }
+    };
+
+    var app = new Vue( {
+        el: '#wrapper',
+        computed: {
+            playlistCount: function () {
+                return this.playlist.length;
+            }
+        },
+        data: {
+            isSideMenuShown: true,
+            activeTab: 1,
+            playlist: [],
+            searchResults: [
+                { id: 1, title: 'Title 1', channel: 'Channel 1', image: 'images/sample.jpg' },
+                { id: 2, title: 'Title 2', channel: 'Channel 2', image: 'images/sample.jpg' },
+                { id: 3, title: 'Title 3', channel: 'Channel 3', image: 'images/sample.jpg' },
+                { id: 4, title: 'Title 4', channel: 'Channel 4', image: 'images/sample.jpg' }
+            ],
+            currentSong: null
+        },
+        components: {
+            'search-component': searchComponent,
+            'playlist-component': playlistComponent
+        },
+        methods: {
+            addToPlaylist: function ( item ) {
+                this.playlist.push( item );
+            }
+        }
+    } );
+</script>
+
+</body>
+
+</html>
