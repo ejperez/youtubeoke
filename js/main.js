@@ -7,13 +7,28 @@ window.onload = function () {
 			}
 		},
 		data: {
-			isSideMenuShown: true,
-			activeTab: 1,
+			isSideMenuShown: false,
+			isLoading: false,
+			activeTab: null,
 			playlist: [],
-			searchResults: [],
+			searchResults: [
+				{
+					id: 1,
+					title: 'Song Name - Artist',
+					channel: 'Channel',
+					image: 'images/bg.jpg'
+				},
+				{
+					id: 1,
+					title: 'Song Name - Artist',
+					channel: 'Channel',
+					image: 'images/bg.jpg'
+				}
+			],
 			currentSong: null,
 			player: null,
 			searchKeyword: null,
+			showPlayer: false,
 			formData: {
 				q: null,
 				part: 'snippet',
@@ -24,39 +39,6 @@ window.onload = function () {
 		},
 		mounted: function () {
 
-			var vm = this;
-
-			var onPlayerReady = function () {
-				console.log( 'ready' );
-			};
-
-			var onPlayerStateChange = function ( event ) {
-
-				if ( event.data == YT.PlayerState.ENDED ) {
-
-					var nextSong = vm.playlist.shift();
-
-					if ( nextSong ) {
-						vm.playSong( nextSong );
-					} else {
-						this.currentSong = null;
-					}
-				}
-			};
-
-			// Create Youtube iFrame API instance
-			this.player = new YT.Player( 'player', {
-				height: '390',
-				width: '640',
-				events: {
-					'onReady': onPlayerReady,
-					'onStateChange': onPlayerStateChange
-				},
-				playerVars: {
-					rel: 0,
-					showinfo: 0
-				}
-			} );
 		},
 		methods: {
 			addToPlaylist: function ( item ) {
@@ -66,6 +48,8 @@ window.onload = function () {
 
 				var vm = this;
 
+				vm.isLoading = true;
+
 				axios.get( 'https://www.googleapis.com/youtube/v3/search', {
 					params: this.formData
 				} ).then( function ( response ) {
@@ -73,40 +57,98 @@ window.onload = function () {
 
 						vm.searchResults = [];
 
+						vm.isLoading = false;
+
 						response.data.items.forEach( function ( item ) {
 							vm.searchResults.push( {
 								id: item.id.videoId,
 								title: item.snippet.title,
 								channel: item.snippet.channelTitle,
-								image: item.snippet.thumbnails.default.url
+								image: item.snippet.thumbnails.medium.url
 							} );
 						} );
 					}
 				} );
 			},
+			playSongFromPlaylist: function ( song, index ) {
+				this.deleteSong( index );
+				this.playSong( song );
+			},
 			playSong: function ( song ) {
-				this.currentSong = song;
 
-				this.player.loadVideoById( {
-					videoId: song.id,
-					rel: 0
-				} );
+				var vm = this;
+
+				var playSong = function ( song ) {
+					vm.currentSong = song;
+
+					vm.player.loadVideoById( {
+						videoId: song.id,
+						rel: 0
+					} );
+				};
+
+				if ( vm.player === null ) {
+
+					vm.showPlayer = true;
+
+					var onPlayerReady = function () {
+						playSong( song );
+					};
+
+					var onPlayerStateChange = function ( event ) {
+
+						if ( event.data == YT.PlayerState.ENDED ) {
+
+							var nextSong = vm.playlist.shift();
+
+							if ( nextSong ) {
+								vm.playSong( nextSong );
+							} else {
+								vm.currentSong = null;
+							}
+						}
+					};
+
+					// Create Youtube iFrame API instance
+					vm.player = new YT.Player( 'player', {
+						height: '390',
+						width: '640',
+						events: {
+							'onReady': onPlayerReady,
+							'onStateChange': onPlayerStateChange
+						},
+						playerVars: {
+							rel: 0,
+							showinfo: 0
+						}
+					} );
+				} else {
+					playSong( song );
+				}
 			},
 			deleteSong: function ( index ) {
 				this.playlist.splice( index, 1 );
+			},
+			hideSidebar: function () {
+				this.isSideMenuShown = false;
+				this.activeTab = null;
+			},
+			showTab: function ( tabId ) {
+				this.activeTab = tabId;
+				this.isSideMenuShown = true;
 			}
 		}
 	} );
 };
 
-//window.onbeforeunload = function ( e ) {
-//	e = e || window.event;
-//
-//	// For IE and Firefox prior to version 4
-//	if ( e ) {
-//		e.returnValue = 'Are you sure? Your playlist will be gone.';
-//	}
-//
-//	// For Safari
-//	return 'Are you sure? Your playlist will be gone.';
-//};
+window.onbeforeunload = function ( e ) {
+	e = e || window.event;
+
+	// For IE and Firefox prior to version 4
+	if ( e ) {
+		e.returnValue = 'Are you sure? Your playlist will be gone.';
+	}
+
+	// For Safari
+	return 'Are you sure? Your playlist will be gone.';
+};

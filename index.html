@@ -14,6 +14,7 @@
     <!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Roboto+Condensed" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
@@ -27,78 +28,61 @@
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="#"><h1>Youtubeoke</h1></a>
-                </div>
-                <div class="col-md-12">
+        <div v-if="isLoading" id="loader">
+            <div id="shadow"></div>
+            <div id="box"></div>
+        </div>
 
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a data-toggle="tab" href="#" v-on:click="activeTab = 1">Search</a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#" v-on:click="activeTab = 2">Playlist ({{ this.playlistCount }})</a>
+        <div v-if="!isLoading" class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" v-bind:class="{ hide: activeTab !== 1}">
+                    <form class="form" v-on:submit.prevent="searchSong">
+                        <fieldset>
+                            <div class="input-group">
+                                <input v-model="formData.q" type="text" class="form-control"
+                                       placeholder="Search for...">
+                                                <span class="input-group-btn"><button class="btn btn-default">Go!
+                                                </button></span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col-md-12" v-bind:class="{ hide: activeTab !== 1}">
+                    <ul class="song-list" v-if="searchResults.length">
+                        <li class="song-list-item" v-for="item in searchResults">
+                            <div>
+                                <img class="img-responsive song-list-image" v-bind:src="item.image" alt="" width="220"
+                                     height="147"/>
+
+                                <h3 class="song-list-title">{{ item.title }}</h3>
+
+                                <sup>{{ item.channel }}</sup>
+                            </div>
+
+                            <button class="btn btn-xs" v-on:click="addToPlaylist( item )">Add to playlist</button>
+                            <button class="btn btn-xs" v-on:click="playSong( item )">Play</button>
                         </li>
                     </ul>
 
-                    <div class="tab-content">
-                        <div id="home" class="tab-pane" v-bind:class="{ active: activeTab === 1}">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <form class="form" v-on:submit.prevent="searchSong">
-                                            <fieldset>
-                                                <div class="input-group">
-                                                    <input v-model="formData.q" type="text" class="form-control"
-                                                           placeholder="Search for...">
-                                                <span class="input-group-btn"><button class="btn btn-default">Go!
-                                                </button></span>
-                                                </div>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <ul v-if="searchResults.length">
-                                            <li v-for="item in searchResults">
-                                                <img v-bind:src="item.image" alt=""/>
+                    <p v-else><br>No item in search results.</p>
+                </div>
+                <div class="col-md-12" v-bind:class="{ hide: activeTab !== 2}">
+                    <ul class="song-list" v-if="playlist.length">
+                        <li class="song-list-item" v-for="(item, index) in playlist">
+                            <div>
+                                <img class="img-responsive song-list-image" v-bind:src="item.image" alt="" width="220"
+                                     height="147"/>
 
-                                                <p>{{ item.title }}</p>
+                                <h3 class="song-list-title">{{ item.title }}</h3>
 
-                                                <p>{{ item.channel }}</p>
-
-                                                <button v-on:click="addToPlaylist( item )">Add to playlist</button>
-                                                <button v-on:click="playSong( item )">Play</button>
-                                            </li>
-                                        </ul>
-                                        <p v-else>No item in search results.</p>
-                                    </div>
-                                </div>
+                                <sup>{{ item.channel }}</sup>
                             </div>
-                        </div>
-                        <div id="menu1" class="tab-pane" v-bind:class="{ active: activeTab === 2}">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <ul v-if="playlist.length">
-                                            <li v-for="(item, index) in playlist">
-                                                <img v-bind:src="item.image" alt=""/>
 
-                                                <p>{{ item.title }}</p>
-
-                                                <p>{{ item.channel }}</p>
-
-                                                <button v-on:click="playSong( item )">Play</button>
-                                                <button v-on:click="deleteSong( index )">Delete</button>
-                                            </li>
-                                        </ul>
-                                        <p v-else>No item in playlist.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            <button class="btn btn-xs" v-on:click="playSongFromPlaylist( item, index )">Play</button>
+                            <button class="btn btn-xs" v-on:click="deleteSong( index )">Delete</button>
+                        </li>
+                    </ul>
+                    <p v-else>No item in playlist.</p>
                 </div>
             </div>
         </div>
@@ -109,19 +93,31 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-sm-4">
+                    <h1 class="brand">Youtubeoke</h1>
+                </div>
+                <div class="col-sm-8 text-right">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button v-on:click="showTab( 1 )" type="button" class="btn btn-lg btn-default" title="Search">
+                            <span class="glyphicon glyphicon-search"></span></button>
+                        <button v-on:click="showTab( 2 )" type="button" class="btn btn-lg btn-default"
+                                title="View playlist"><span class="glyphicon glyphicon-list"></span> <span
+                                class="badge">{{ playlist.length }}</span></button>
+                        <button v-on:click="hideSidebar()" type="button" class="btn btn-lg btn-default"
+                                title="Hide sidebar"><span class="glyphicon glyphicon-fullscreen"></span></button>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
                 <div class="col-md-12">
-                    <div class="embed-responsive embed-responsive-16by9">
+                    <div v-bind:class="{ hide: !showPlayer }" class="embed-responsive embed-responsive-16by9">
                         <div id="player"></div>
                     </div>
                     <h2 v-if="currentSong">Now playing: {{ currentSong.title }}</h2>
 
                     <p v-else>Search a song to begin.</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="#menu-toggle" class="btn btn-sm btn-secondary" id="menu-toggle"
-                       v-on:click="isSideMenuShown = !isSideMenuShown">Toggle Menu</a>
                 </div>
             </div>
         </div>
