@@ -11,20 +11,7 @@ window.onload = function () {
 			isLoading: false,
 			activeTab: null,
 			playlist: [],
-			searchResults: [
-				{
-					id: 1,
-					title: 'Song Name - Artist',
-					channel: 'Channel',
-					image: 'images/bg.jpg'
-				},
-				{
-					id: 1,
-					title: 'Song Name - Artist',
-					channel: 'Channel',
-					image: 'images/bg.jpg'
-				}
-			],
+			searchResults: [],
 			currentSong: null,
 			player: null,
 			searchKeyword: null,
@@ -38,7 +25,8 @@ window.onload = function () {
 			}
 		},
 		mounted: function () {
-
+			this.formData.q = 'karaoke';
+			this.searchSong();
 		},
 		methods: {
 			addToPlaylist: function ( item ) {

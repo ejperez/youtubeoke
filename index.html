@@ -36,6 +36,7 @@
         <div v-if="!isLoading" class="container-fluid">
             <div class="row">
                 <div class="col-md-12" v-bind:class="{ hide: activeTab !== 1}">
+                    <h2 class="tab-name">Search</h2>
                     <form class="form" v-on:submit.prevent="searchSong">
                         <fieldset>
                             <div class="input-group">
@@ -64,9 +65,10 @@
                         </li>
                     </ul>
 
-                    <p v-else><br>No item in search results.</p>
+                    <p v-else><br>No songs.</p>
                 </div>
                 <div class="col-md-12" v-bind:class="{ hide: activeTab !== 2}">
+                    <h2 class="tab-name">Playlist</h2>
                     <ul class="song-list" v-if="playlist.length">
                         <li class="song-list-item" v-for="(item, index) in playlist">
                             <div>
@@ -82,7 +84,7 @@
                             <button class="btn btn-xs" v-on:click="deleteSong( index )">Delete</button>
                         </li>
                     </ul>
-                    <p v-else>No item in playlist.</p>
+                    <p v-else>No songs.</p>
                 </div>
             </div>
         </div>
@@ -112,12 +114,14 @@
 
             <div class="row">
                 <div class="col-md-12">
+
+                    <p v-if="currentSong">Now playing: {{ currentSong.title }}</p>
+
                     <div v-bind:class="{ hide: !showPlayer }" class="embed-responsive embed-responsive-16by9">
                         <div id="player"></div>
                     </div>
-                    <h2 v-if="currentSong">Now playing: {{ currentSong.title }}</h2>
 
-                    <p v-else>Search a song to begin.</p>
+                    <p v-if="!currentSong">Search a song to begin.</p>
                 </div>
             </div>
         </div>

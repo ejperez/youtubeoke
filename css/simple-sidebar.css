@@ -137,6 +137,10 @@ body {
     top: -2px;
 }
 
+.tab-name {
+    font-size: 20px;
+}
+
 #loader {
     /* Uncomment this to make it run! */
     /*
