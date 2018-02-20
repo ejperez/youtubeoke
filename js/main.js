@@ -25,15 +25,41 @@ window.onload = function () {
 			}
 		},
 		mounted: function () {
-			this.formData.q = 'karaoke';
-			this.searchSong();
+
+			var vm = this;
+
+			vm.formData.q = 'karaoke';
+			vm.searchSong();
+
+			// Create Youtube iFrame API instance
+			this.player = new YT.Player( 'player', {
+				height: '390',
+				width: '640',
+				events: {
+					'onStateChange': function ( event ) {
+						if ( event.data == YT.PlayerState.ENDED ) {
+
+							var nextSong = vm.playlist.shift();
+
+							if ( nextSong ) {
+								vm.playSong( nextSong );
+							} else {
+								vm.currentSong = null;
+							}
+						}
+					}
+				},
+				playerVars: {
+					rel: 0,
+					showinfo: 0
+				}
+			} );
 		},
 		methods: {
 			addToPlaylist: function ( item ) {
 				this.playlist.push( item );
 			},
 			searchSong: function () {
-
 				var vm = this;
 
 				vm.isLoading = true;
@@ -64,55 +90,12 @@ window.onload = function () {
 			},
 			playSong: function ( song ) {
 
-				var vm = this;
+				this.showPlayer = true;
 
-				var playSong = function ( song ) {
-					vm.currentSong = song;
-
-					vm.player.loadVideoById( {
-						videoId: song.id,
-						rel: 0
-					} );
-				};
-
-				if ( vm.player === null ) {
-
-					vm.showPlayer = true;
-
-					var onPlayerReady = function () {
-						playSong( song );
-					};
-
-					var onPlayerStateChange = function ( event ) {
-
-						if ( event.data == YT.PlayerState.ENDED ) {
-
-							var nextSong = vm.playlist.shift();
-
-							if ( nextSong ) {
-								vm.playSong( nextSong );
-							} else {
-								vm.currentSong = null;
-							}
-						}
-					};
-
-					// Create Youtube iFrame API instance
-					vm.player = new YT.Player( 'player', {
-						height: '390',
-						width: '640',
-						events: {
-							'onReady': onPlayerReady,
-							'onStateChange': onPlayerStateChange
-						},
-						playerVars: {
-							rel: 0,
-							showinfo: 0
-						}
-					} );
-				} else {
-					playSong( song );
-				}
+				this.player.loadVideoById( {
+					videoId: song.id,
+					rel: 0
+				} );
 			},
 			deleteSong: function ( index ) {
 				this.playlist.splice( index, 1 );
