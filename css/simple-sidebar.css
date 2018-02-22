@@ -141,7 +141,7 @@ body {
     font-size: 20px;
 }
 
-#loader {
+.loader {
     /* Uncomment this to make it run! */
     /*
        animation: loader 5s linear infinite;
@@ -150,6 +150,11 @@ body {
     position: absolute;
     top: calc(50% - 20px);
     left: calc(50% - 20px);
+}
+
+.loader-text {
+    text-align: center;
+    margin-top: 20%;
 }
 
 @keyframes loader {
@@ -161,7 +166,7 @@ body {
     }
 }
 
-#box {
+.box {
     width: 50px;
     height: 50px;
     background: #fff;
@@ -191,10 +196,10 @@ body {
     }
 }
 
-#shadow {
+.shadow {
     width: 50px;
     height: 5px;
-    background: #000;
+    background: #fff;
     opacity: 0.1;
     position: absolute;
     top: 59px;

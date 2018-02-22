@@ -19,24 +19,43 @@
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
+    <style>
+        .overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #17052B;
+            z-index: 1;
+        }
+    </style>
+
 </head>
 
 <body>
 
 <div id="wrapper" v-bind:class="{ toggled: isSideMenuShown }">
 
+    <div class="overlay" v-if="showOverlay">
+        <div class="loader">
+            <div class="shadow"></div>
+            <div class="box"></div>
+        </div>
+        <h1 class="loader-text">Welcome great singers!</h1>
+    </div>
+
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
 
-        <div v-if="isLoading" id="loader">
-            <div id="shadow"></div>
-            <div id="box"></div>
+        <div v-if="isLoading" class="loader">
+            <div class="shadow"></div>
+            <div class="box"></div>
         </div>
 
         <div v-if="!isLoading" class="container-fluid">
             <div class="row">
                 <div class="col-md-12" v-bind:class="{ hide: activeTab !== 1}">
                     <h2 class="tab-name">Search</h2>
+
                     <form class="form" v-on:submit.prevent="searchSong">
                         <fieldset>
                             <div class="input-group">
@@ -116,12 +135,11 @@
                 <div class="col-md-12">
 
                     <p v-if="currentSong">Now playing: {{ currentSong.title }}</p>
+                    <p v-else>Search or select a song to begin.</p>
 
                     <div v-bind:class="{ hide: !showPlayer }" class="embed-responsive embed-responsive-16by9">
                         <div id="player"></div>
                     </div>
-
-                    <p v-if="!currentSong">Search a song to begin.</p>
                 </div>
             </div>
         </div>

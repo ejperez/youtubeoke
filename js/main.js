@@ -7,6 +7,7 @@ window.onload = function () {
 			}
 		},
 		data: {
+			showOverlay: true,
 			isSideMenuShown: false,
 			isLoading: false,
 			activeTab: null,
@@ -36,6 +37,9 @@ window.onload = function () {
 				height: '390',
 				width: '640',
 				events: {
+					'onReady': function () {
+						vm.showOverlay = false;
+					},
 					'onStateChange': function ( event ) {
 						if ( event.data == YT.PlayerState.ENDED ) {
 
@@ -90,12 +94,14 @@ window.onload = function () {
 			},
 			playSong: function ( song ) {
 
-				this.showPlayer = true;
+				this.currentSong = song;
 
 				this.player.loadVideoById( {
 					videoId: song.id,
 					rel: 0
 				} );
+
+				this.showPlayer = true;
 			},
 			deleteSong: function ( index ) {
 				this.playlist.splice( index, 1 );
