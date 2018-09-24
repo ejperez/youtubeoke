@@ -71,12 +71,9 @@ window.onload = function () {
 				axios.get( 'https://www.googleapis.com/youtube/v3/search', {
 					params: this.formData
 				} ).then( function ( response ) {
-					if ( response.data.hasOwnProperty( 'items' ) && response.data.items.length > 0 ) {
-
-						vm.searchResults = [];
-
-						vm.isLoading = false;
-
+					vm.searchResults = [];
+					
+					if ( response.data.hasOwnProperty( 'items' ) && response.data.items.length > 0 ) {												
 						response.data.items.forEach( function ( item ) {
 							vm.searchResults.push( {
 								id: item.id.videoId,
@@ -86,6 +83,8 @@ window.onload = function () {
 							} );
 						} );
 					}
+					
+					vm.isLoading = false;
 				} );
 			},
 			playSongFromPlaylist: function ( song, index ) {
