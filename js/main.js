@@ -10,7 +10,13 @@ window.onload = function () {
 			showOverlay: true,
 			isSideMenuShown: false,
 			isLoading: false,
-			activeTab: null,
+			activeTab: 1,
+
+			// CSS properties
+			searchListHeight: 0,
+			playListHeight: 0,
+			logoMarginTop: 0,
+
 			playlist: [],
 			searchResults: [],
 			currentSong: null,
@@ -26,7 +32,6 @@ window.onload = function () {
 			}
 		},
 		mounted: function () {
-
 			var vm = this;
 
 			vm.formData.q = 'karaoke';
@@ -58,6 +63,9 @@ window.onload = function () {
 					showinfo: 0
 				}
 			} );
+
+			window.addEventListener( 'resize', vm.resizeList );
+			vm.resizeList();
 		},
 		methods: {
 			addToPlaylist: function ( item ) {
@@ -72,8 +80,8 @@ window.onload = function () {
 					params: this.formData
 				} ).then( function ( response ) {
 					vm.searchResults = [];
-					
-					if ( response.data.hasOwnProperty( 'items' ) && response.data.items.length > 0 ) {												
+
+					if ( response.data.hasOwnProperty( 'items' ) && response.data.items.length > 0 ) {
 						response.data.items.forEach( function ( item ) {
 							vm.searchResults.push( {
 								id: item.id.videoId,
@@ -83,8 +91,9 @@ window.onload = function () {
 							} );
 						} );
 					}
-					
+
 					vm.isLoading = false;
+					vm.isSideMenuShown = true;
 				} );
 			},
 			playSongFromPlaylist: function ( song, index ) {
@@ -105,13 +114,26 @@ window.onload = function () {
 			deleteSong: function ( index ) {
 				this.playlist.splice( index, 1 );
 			},
-			hideSidebar: function () {
-				this.isSideMenuShown = false;
-				this.activeTab = null;
-			},
 			showTab: function ( tabId ) {
 				this.activeTab = tabId;
-				this.isSideMenuShown = true;
+				var list = null;
+
+				if ( tabId === 1 ) {
+					list = document.getElementById( 'js-search-list' );
+				} else if ( tabId === 2 ) {
+					list = document.getElementById( 'js-play-list' );
+				}
+
+				if ( list !== null ) {
+					setTimeout( function () {
+						list.scrollTop = 0;
+					}, 100 );
+				}
+			},
+			resizeList: function () {
+				this.searchListHeight = window.innerHeight - 150;
+				this.playListHeight = window.innerHeight - 98;
+				this.logoMarginTop = window.innerHeight / 2 - 160;
 			}
 		}
 	} );
