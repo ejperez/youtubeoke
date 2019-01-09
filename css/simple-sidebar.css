@@ -98,29 +98,37 @@ body {
     margin-top: 20px;
 }
 
+.search-form input[type=text] {
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+}
+
 .song-list {
     list-style-type: none;
     padding-left: 0;
     overflow: auto;
     margin-top: 20px;
+    padding-right: 1px;
 }
 
 .song-list-item {
-    background-color: #fff;
+    background-color: rgba( 0, 0, 0, 0);
     padding: 5px;
-    color: black;
+    color: #fff;
     margin-bottom: 5px;
+    border: solid thin #fff;
+    border-radius: 5px;
 }
 
 .song-list-item .btn {
-    background-color: #fff;
-    color: #000;
-    border-color: #000;
+    background-color: rgba( 0, 0, 0, 0);
+    color: #fff;
+    border-color: #fff;
 }
 
 .song-list-item .btn:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
 }
 
 .song-list-title {
@@ -211,6 +219,24 @@ body {
 }
 
 .logo {
-	width: 280px;
-	margin-top: 100px;
+    width: 280px;
+    margin-top: 100px;
+}
+
+/* Scroll bar */
+/* Width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #fff;
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-radius: 2px;
 }
