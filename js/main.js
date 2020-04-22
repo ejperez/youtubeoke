@@ -24,11 +24,7 @@ window.onload = function () {
 			searchKeyword: null,
 			showPlayer: false,
 			formData: {
-				q: null,
-				part: 'snippet',
-				key: 'AIzaSyCc-Ig4WkasVymPRqJbxnr7mF7NXLZPk84',
-				maxResults: 50,
-				type: 'video'
+				q: null
 			}
 		},
 		mounted: function () {
@@ -76,7 +72,7 @@ window.onload = function () {
 
 				vm.isLoading = true;
 
-				axios.get( 'https://www.googleapis.com/youtube/v3/search', {
+				axios.get( 'https://utubeoke-api.herokuapp.com', {
 					params: this.formData
 				} ).then( function ( response ) {
 					vm.searchResults = [];
