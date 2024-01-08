@@ -1,3 +1,9 @@
+function decodeEntity(inputStr) {
+  var textarea = document.createElement("textarea");
+  textarea.innerHTML = inputStr;
+  return textarea.value;
+}
+
 window.onload = function () {
   if (!("Vue" in window)) {
     return;
@@ -92,7 +98,7 @@ window.onload = function () {
               data.items.forEach(function (item) {
                 vm.searchResults.push({
                   id: item.id.videoId,
-                  title: item.snippet.title,
+                  title: decodeEntity(item.snippet.title),
                   channel: item.snippet.channelTitle,
                   image: item.snippet.thumbnails.medium.url,
                 });
