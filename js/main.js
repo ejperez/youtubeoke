@@ -1,148 +1,159 @@
 window.onload = function () {
-	var app = new Vue( {
-		el: '#wrapper',
-		computed: {
-			playlistCount: function () {
-				return this.playlist.length;
-			}
-		},
-		data: {
-			showOverlay: true,
-			isSideMenuShown: false,
-			isLoading: false,
-			activeTab: 1,
+  if (!("Vue" in window)) {
+    return;
+  }
 
-			// CSS properties
-			searchListHeight: 0,
-			playListHeight: 0,
-			logoMarginTop: 0,
+  const { createApp } = Vue;
 
-			playlist: [],
-			searchResults: [],
-			currentSong: null,
-			player: null,
-			searchKeyword: null,
-			showPlayer: false,
-			formData: {
-				q: null
-			}
-		},
-		mounted: function () {
-			var vm = this;
+  createApp({
+    computed() {
+      return {
+        playlistCount() {
+          return this.playlist.length;
+        },
+      };
+    },
+    data() {
+      return {
+        showOverlay: true,
+        isSideMenuShown: false,
+        isLoading: false,
+        activeTab: 1,
 
-			vm.formData.q = 'karaoke';
-			vm.searchSong();
+        // CSS properties
+        searchListHeight: 0,
+        playListHeight: 0,
+        logoMarginTop: 0,
 
-			// Create Youtube iFrame API instance
-			this.player = new YT.Player( 'player', {
-				height: '390',
-				width: '640',
-				events: {
-					'onReady': function () {
-						vm.showOverlay = false;
-					},
-					'onStateChange': function ( event ) {
-						if ( event.data == YT.PlayerState.ENDED ) {
+        playlist: [],
+        searchResults: [],
+        currentSong: null,
+        player: null,
+        searchKeyword: null,
+        showPlayer: false,
+        formData: {
+          q: null,
+        },
+      };
+    },
+    mounted() {
+      var vm = this;
 
-							var nextSong = vm.playlist.shift();
+      vm.formData.q = "karaoke";
+      vm.searchSong();
 
-							if ( nextSong ) {
-								vm.playSong( nextSong );
-							} else {
-								vm.currentSong = null;
-							}
-						}
-					}
-				},
-				playerVars: {
-					rel: 0,
-					showinfo: 0
-				}
-			} );
+      // Create Youtube iFrame API instance
+      this.player = new YT.Player("player", {
+        height: "390",
+        width: "640",
+        events: {
+          onReady() {
+            vm.showOverlay = false;
+          },
+          onStateChange(event) {
+            if (event.data == YT.PlayerState.ENDED) {
+              var nextSong = vm.playlist.shift();
 
-			window.addEventListener( 'resize', vm.resizeList );
-			vm.resizeList();
-		},
-		methods: {
-			addToPlaylist: function ( item ) {
-				this.playlist.push( item );
-			},
-			searchSong: function () {
-				var vm = this;
+              if (nextSong) {
+                vm.playSong(nextSong);
+              } else {
+                vm.currentSong = null;
+              }
+            }
+          },
+        },
+        playerVars: {
+          rel: 0,
+          showinfo: 0,
+        },
+      });
 
-				vm.isLoading = true;
+      window.addEventListener("resize", vm.resizeList);
+      vm.resizeList();
+    },
+    methods: {
+      addToPlaylist(item) {
+        this.playlist.push(item);
+      },
+      searchSong() {
+        var vm = this;
 
-				axios.get( 'https://utubeoke-api.herokuapp.com', {
-					params: this.formData
-				} ).then( function ( response ) {
-					vm.searchResults = [];
+        vm.isLoading = true;
 
-					if ( response.data.hasOwnProperty( 'items' ) && response.data.items.length > 0 ) {
-						response.data.items.forEach( function ( item ) {
-							vm.searchResults.push( {
-								id: item.id.videoId,
-								title: item.snippet.title,
-								channel: item.snippet.channelTitle,
-								image: item.snippet.thumbnails.medium.url
-							} );
-						} );
-					}
+        fetch(
+          "https://ejpentertainment.000webhostapp.com?q=" +
+            encodeURIComponent(this.formData.q)
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            vm.searchResults = [];
 
-					vm.isLoading = false;
-					vm.isSideMenuShown = true;
-				} );
-			},
-			playSongFromPlaylist: function ( song, index ) {
-				this.deleteSong( index );
-				this.playSong( song );
-			},
-			playSong: function ( song ) {
+            if ("items" in data && data.items.length > 0) {
+              data.items.forEach(function (item) {
+                vm.searchResults.push({
+                  id: item.id.videoId,
+                  title: item.snippet.title,
+                  channel: item.snippet.channelTitle,
+                  image: item.snippet.thumbnails.medium.url,
+                });
+              });
+            }
 
-				this.currentSong = song;
+            vm.isLoading = false;
+            vm.isSideMenuShown = true;
+          })
+          .catch((e) => console.debug(e));
+      },
+      playSongFromPlaylist(song, index) {
+        this.deleteSong(index);
+        this.playSong(song);
+      },
+      playSong(song) {
+        this.currentSong = song;
 
-				this.player.loadVideoById( {
-					videoId: song.id,
-					rel: 0
-				} );
+        this.player.loadVideoById({
+          videoId: song.id,
+          rel: 0,
+        });
 
-				this.showPlayer = true;
-			},
-			deleteSong: function ( index ) {
-				this.playlist.splice( index, 1 );
-			},
-			showTab: function ( tabId ) {
-				this.activeTab = tabId;
-				var list = null;
+        this.showPlayer = true;
+      },
+      deleteSong(index) {
+        this.playlist.splice(index, 1);
+      },
+      showTab(tabId) {
+        this.activeTab = tabId;
+        var list = null;
 
-				if ( tabId === 1 ) {
-					list = document.getElementById( 'js-search-list' );
-				} else if ( tabId === 2 ) {
-					list = document.getElementById( 'js-play-list' );
-				}
+        if (tabId === 1) {
+          list = document.getElementById("js-search-list");
+        } else if (tabId === 2) {
+          list = document.getElementById("js-play-list");
+        }
 
-				if ( list !== null ) {
-					setTimeout( function () {
-						list.scrollTop = 0;
-					}, 100 );
-				}
-			},
-			resizeList: function () {
-				this.searchListHeight = window.innerHeight - 150;
-				this.playListHeight = window.innerHeight - 98;
-				this.logoMarginTop = window.innerHeight / 2 - 160;
-			}
-		}
-	} );
+        if (list !== null) {
+          setTimeout(function () {
+            list.scrollTop = 0;
+          }, 100);
+        }
+      },
+      resizeList() {
+        this.searchListHeight = window.innerHeight - 150;
+        this.playListHeight = window.innerHeight - 98;
+        this.logoMarginTop = window.innerHeight / 2 - 160;
+      },
+    },
+  }).mount("#app");
 };
 
-window.onbeforeunload = function ( e ) {
-	e = e || window.event;
+window.onbeforeunload = function (e) {
+  e = e || window.event;
 
-	// For IE and Firefox prior to version 4
-	if ( e ) {
-		e.returnValue = 'Are you sure? Your playlist will be gone.';
-	}
+  // For IE and Firefox prior to version 4
+  if (e) {
+    e.returnValue = "Are you sure? Your playlist will be gone.";
+  }
 
-	// For Safari
-	return 'Are you sure? Your playlist will be gone.';
+  // For Safari
+  return "Are you sure? Your playlist will be gone.";
 };
