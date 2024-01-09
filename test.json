@@ -1,0 +1,693 @@
+{
+    "kind": "youtube#searchListResponse",
+    "etag": "fda-UHQP1pj7H-n4MVQ0HKHuWnM",
+    "nextPageToken": "CBQQAA",
+    "regionCode": "CY",
+    "pageInfo": {
+      "totalResults": 1000000,
+      "resultsPerPage": 20
+    },
+    "items": [
+      {
+        "kind": "youtube#searchResult",
+        "etag": "-4B8_HIa_jcTd8QHfttsyJ5uMjQ",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "4NQLCeLf3ws"
+        },
+        "snippet": {
+          "publishedAt": "2023-06-25T02:07:24Z",
+          "channelId": "UCYoyJMIAbcQtZCi04rRfknQ",
+          "title": "Tak Segampang Itu - Anggi Marito (Karaoke)",
+          "description": "Karaoke Tak Segampang Itu Tak Segampang Itu Karaoke Karaoke Tak Segampang Itu Anggi Marito Karaoke Pop Melayu ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/4NQLCeLf3ws/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/4NQLCeLf3ws/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/4NQLCeLf3ws/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Gitaris Laperan",
+          "liveBroadcastContent": "none",
+          "publishTime": "2023-06-25T02:07:24Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "SQ5mVbCd6kY3oz2pIaTbCPDt2xI",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "DLJJ8OiQkAA"
+        },
+        "snippet": {
+          "publishedAt": "2024-01-07T08:51:18Z",
+          "channelId": "UCL2dcc_OrhQhnHLCynoSDwg",
+          "title": "Karaoke Xuân Này Con Không Về Tone Nam ( Mi Trưởng ) Nhạc Xuân Mới Nhất",
+          "description": "Karaoke Tuấn Cò là kênh karaoke nhạc sống độc quyền phát hành những ca khúc Karaoke mới nhất gồm nhiều thể loại khác ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/DLJJ8OiQkAA/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/DLJJ8OiQkAA/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/DLJJ8OiQkAA/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Karaoke Tuấn Cò",
+          "liveBroadcastContent": "none",
+          "publishTime": "2024-01-07T08:51:18Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "Z6ZMd6_wd3DksQdj8xqW1auKAoI",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "N-ZfTlgfWyA"
+        },
+        "snippet": {
+          "publishedAt": "2023-04-21T06:00:07Z",
+          "channelId": "UCnhGGwKnazXyAJkyfQ-4KGQ",
+          "title": "Nemen Karaoke Koplo Nada Wanita (Gildcoustic)",
+          "description": "https://youtu.be/sUhY0h3Nr90 #Karaoke #Style_Yamaha #Xg_karaoke NEMEN - GILDCOUSTIC (official video lirik) Original ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/N-ZfTlgfWyA/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/N-ZfTlgfWyA/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/N-ZfTlgfWyA/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "XG KARAOKE MUSIC",
+          "liveBroadcastContent": "none",
+          "publishTime": "2023-04-21T06:00:07Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "50jEyubpdXk8gvhBeT4VvvDRJks",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "H8w1Gj7m0uo"
+        },
+        "snippet": {
+          "publishedAt": "2023-06-06T03:20:36Z",
+          "channelId": "UCip6z8k2u08d9XJo_Si1YLQ",
+          "title": "Kung AKo Na Lang Sana - Bituin Escalante (Karaoke Version)",
+          "description": "Song Title: Kung Ako Na Lang Sana Original Singer: Bituin Escalante Music: CTTO Video: Level Up Entertainment Editor: ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/H8w1Gj7m0uo/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/H8w1Gj7m0uo/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/H8w1Gj7m0uo/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Level Up Entertainment",
+          "liveBroadcastContent": "none",
+          "publishTime": "2023-06-06T03:20:36Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "vqjHA02bmyB6hJZtNfgTaWVPWYA",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "T9fq4ny26Lo"
+        },
+        "snippet": {
+          "publishedAt": "2024-01-08T03:42:15Z",
+          "channelId": "UCWEYgC77_ZlbDxStQyzOwfA",
+          "title": "Nửa Đêm Ngoài Phố Karaoke Tone Nam Nhạc Sống | Trọng Hiếu",
+          "description": "Bài Hát Nửa Đêm Ngoài Phố Karaoke Tone Nam Nhạc Sống | Trọng Hiếu Hiếu Organ là kênh karaoke nhạc sống độc quyền ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/T9fq4ny26Lo/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/T9fq4ny26Lo/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/T9fq4ny26Lo/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Hiếu Organ",
+          "liveBroadcastContent": "none",
+          "publishTime": "2024-01-08T03:42:15Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "U6ZkHvUXwNK1SUibGJVHVHR6Bm4",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "kQGaVFbD1b0"
+        },
+        "snippet": {
+          "publishedAt": "2017-09-17T06:55:46Z",
+          "channelId": "UCU8_75EyN-sf6EECum_CMmw",
+          "title": "Anong Nangyari Sa Ating Dalawa - AIZA SIGUERRA (KARAOKE)",
+          "description": "A KARAOKE COVER SONG Good for low Speed Internet connection. BEST VIEWED IN HD format PC or MOBILE Cell phones.",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/kQGaVFbD1b0/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/kQGaVFbD1b0/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/kQGaVFbD1b0/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "PRO music COVER",
+          "liveBroadcastContent": "none",
+          "publishTime": "2017-09-17T06:55:46Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "SLOAmC35wK1M1qO7FzkfwtTOjvQ",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "8LXu8LrbvgA"
+        },
+        "snippet": {
+          "publishedAt": "2023-04-22T12:17:53Z",
+          "channelId": "UCJqT2D4WZ2Cf93RqX6mWnxA",
+          "title": "KARAOKE | Ai Chung Tình Được Mãi Tone Nữ Beat Chuẩn",
+          "description": "Bài hát : Ai Chung Tình Được Mãi ST : Nhạc Sĩ - Đinh Tùng Huy - Thể loại : Karaoke nhạc sống - CÁC BẠN ĐANG NGHE NHẠC ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/8LXu8LrbvgA/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/8LXu8LrbvgA/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/8LXu8LrbvgA/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "karaoke Lâm Nguyễn HD",
+          "liveBroadcastContent": "none",
+          "publishTime": "2023-04-22T12:17:53Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "Gp3Ta6ciI_6WZ3svubnt-Wg8uZ8",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "Y7KXeYTfd2s"
+        },
+        "snippet": {
+          "publishedAt": "2024-01-09T01:15:19Z",
+          "channelId": "UCWEYgC77_ZlbDxStQyzOwfA",
+          "title": "Hoa Cỏ Lau Karaoke Tone Nữ ( Em ) Nhạc Sống Rumba | Trọng Hiếu",
+          "description": "Bài Hát Hoa Cỏ Lau Karaoke Tone Nữ ( Em ) Nhạc Sống Rumba | Trọng Hiếu Hiếu Organ là kênh karaoke nhạc sống độc ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/Y7KXeYTfd2s/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/Y7KXeYTfd2s/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/Y7KXeYTfd2s/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Hiếu Organ",
+          "liveBroadcastContent": "none",
+          "publishTime": "2024-01-09T01:15:19Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "PqKbC8OAsX89Vv_FEt1lO_fYuhs",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "mGEAlNYr0g0"
+        },
+        "snippet": {
+          "publishedAt": "2024-01-06T12:24:24Z",
+          "channelId": "UCRQQdfYUf1fFiqFExuBdleg",
+          "title": "SUARA HATI ( NIKE ARDILA ) KARAOKE - NADA PRIA - VERSI REMIX TERBARU  2024",
+          "description": "SUARA HATI ( NIKE ARDILA ) KARAOKE - NADA PRIA - VERSI REMIX TERBARU 2024 Judul : SUARA HATI Versi : REMIX ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/mGEAlNYr0g0/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/mGEAlNYr0g0/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/mGEAlNYr0g0/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "EVA CINDY MUSIK",
+          "liveBroadcastContent": "none",
+          "publishTime": "2024-01-06T12:24:24Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "GIh-xR31bPzDjyIqR-DYh4JZTYo",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "I3EF9aFcxi4"
+        },
+        "snippet": {
+          "publishedAt": "2023-02-10T03:19:40Z",
+          "channelId": "UCXqXffFOpEkNC8Yl7YEr6Vw",
+          "title": "Tìm Em Câu Ví Sông Lam Karaoke Tone Nam Nhạc Sống gia huy karaoke",
+          "description": "karaokebolero#giahuybeat#timemcauvisonglam#giahuykaraoke bài hát : Tìm Em Câu Ví Sông Lam Sáng tác : Ngô Sĩ Ngọc Thể ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/I3EF9aFcxi4/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/I3EF9aFcxi4/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/I3EF9aFcxi4/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Gia Huy Karaoke",
+          "liveBroadcastContent": "none",
+          "publishTime": "2023-02-10T03:19:40Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "MkWNsmp9du0enayGfZc5eiD14YA",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "4o-jv3Ry6a4"
+        },
+        "snippet": {
+          "publishedAt": "2023-02-13T03:29:57Z",
+          "channelId": "UCip6z8k2u08d9XJo_Si1YLQ",
+          "title": "Sabihin - Zelle (Karaoke)",
+          "description": "Song Title: Sabihin Original Singer: Zelle Music: CTTO Video: Level Up Entertainment Editor: Jhon Carlo C. Lyrics: Bakit wala ka ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/4o-jv3Ry6a4/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/4o-jv3Ry6a4/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/4o-jv3Ry6a4/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Level Up Entertainment",
+          "liveBroadcastContent": "none",
+          "publishTime": "2023-02-13T03:29:57Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "sXpYDVeuP9JQAaL-W1lM7GuhXEo",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "Qwiicax9KTI"
+        },
+        "snippet": {
+          "publishedAt": "2022-05-27T02:00:09Z",
+          "channelId": "UCYoyJMIAbcQtZCi04rRfknQ",
+          "title": "Cinta Tak Harus Memiliki (Karaoke Akustik) - ST 12 (Indah Yastami Version)",
+          "description": "Karaoke Cinta Tak Harus Memiliki ST 12 Karaoke Cinta Tak Harus Memiliki Indah Yastami Cinta Tak Harus Memiliki Karaoke ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/Qwiicax9KTI/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/Qwiicax9KTI/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/Qwiicax9KTI/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Gitaris Laperan",
+          "liveBroadcastContent": "none",
+          "publishTime": "2022-05-27T02:00:09Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "2X3_8_bUrNeZip-Ihri7lBVE_Pw",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "xZA4JnJm1EY"
+        },
+        "snippet": {
+          "publishedAt": "2022-10-23T01:38:44Z",
+          "channelId": "UC3ZNuYIoi2tQqYNiOeY4JFA",
+          "title": "AT ANG HIRAP (KARAOKE VERSION) Angeline Quinto",
+          "description": "AT ANG HIRAP karaoke Version by Angeline Quinto Credit to the owner: ABS-CBN Film Productions, Inc., Muserk Rights ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/xZA4JnJm1EY/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/xZA4JnJm1EY/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/xZA4JnJm1EY/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Secret Voices ph",
+          "liveBroadcastContent": "none",
+          "publishTime": "2022-10-23T01:38:44Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "r3vImoIkjFRdH2U22nM2vbyXdtE",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "qrj2oY1LPMI"
+        },
+        "snippet": {
+          "publishedAt": "2023-05-31T08:23:18Z",
+          "channelId": "UCNbFgUCJj2Ls6LVzBbL8fqA",
+          "title": "Rick Price - Heaven Knows (Karaoke)",
+          "description": "Please watch: \"Minamahal Kita - Freddie Aguilar (karaoke)\" https://www.youtube.com/watch?v=-hCh952CezI --~-- #karaokeyTV ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/qrj2oY1LPMI/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/qrj2oY1LPMI/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/qrj2oY1LPMI/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "KaraokeyTV",
+          "liveBroadcastContent": "none",
+          "publishTime": "2023-05-31T08:23:18Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "IcRfJBdX7CjCIyLZ8TRW3GS374k",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "fZyW-T0w0X4"
+        },
+        "snippet": {
+          "publishedAt": "2021-05-12T00:00:07Z",
+          "channelId": "UCutZyApGOjqhOS-pp7yAj4Q",
+          "title": "BEAUTIFUL IN WHITE - Westlife (HD Karaoke)",
+          "description": "Sa mga idol natin d'yan na ikinasal na at magpapakasal pa lang, malamang ay kasama sa line-up ng inyong mga awitin ang ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/fZyW-T0w0X4/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/fZyW-T0w0X4/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/fZyW-T0w0X4/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Atomic Karaoke",
+          "liveBroadcastContent": "none",
+          "publishTime": "2021-05-12T00:00:07Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "mK6ZhxakwijteOQ2NTnM_sAJQe0",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "89oYKWYmIjo"
+        },
+        "snippet": {
+          "publishedAt": "2023-01-22T17:26:42Z",
+          "channelId": "UCAMo5xvMz1_Yt_sJAvjqZ8A",
+          "title": "Mahalini - Bohongi Hati (Karaoke Version - No Vocal)",
+          "description": "Mahalini #fábula #BohongiHati Originally Performed by Mahalini Raharja \"Bohongi Hati\" ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/89oYKWYmIjo/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/89oYKWYmIjo/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/89oYKWYmIjo/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Muhammad Reza Fahlevi",
+          "liveBroadcastContent": "none",
+          "publishTime": "2023-01-22T17:26:42Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "06R-6lKoKF_z9qWpqhc0bmfGAEM",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "qBNkPgsPB-4"
+        },
+        "snippet": {
+          "publishedAt": "2020-11-06T18:35:53Z",
+          "channelId": "UC_8trJeOiVSbjPwVML55PWw",
+          "title": "KARAOKE (Como la Flor - Selena)",
+          "description": "Escucha los karaokes sin marca de agua en SPOTIFY: https://open.spotify.com/artist/1NDmwU4ef0kQqNaIuPBSOB *Análisis ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/qBNkPgsPB-4/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/qBNkPgsPB-4/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/qBNkPgsPB-4/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Karaoke Pro",
+          "liveBroadcastContent": "none",
+          "publishTime": "2020-11-06T18:35:53Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "jfqRFKi49kiJdkz_qgpanQOYolc",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "c2OaLEt5Cds"
+        },
+        "snippet": {
+          "publishedAt": "2020-04-04T13:07:28Z",
+          "channelId": "UC60U_dcIxAcIkcFQhFy_M4w",
+          "title": "Akhir Sebuah Cerita - Karaoke | Imron Sadewo",
+          "description": "Song by: Imron Sadewo Tittle: Akhir Sebuah Cerita Type of Music: Karaoke Music by: Swara Nada Entertainment Video musik ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/c2OaLEt5Cds/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/c2OaLEt5Cds/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/c2OaLEt5Cds/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Swara Nada Entertainment",
+          "liveBroadcastContent": "none",
+          "publishTime": "2020-04-04T13:07:28Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "h7zkcd3N3Yk0V6Cq4No0CGKJx38",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "Ae0fvJ-aR-s"
+        },
+        "snippet": {
+          "publishedAt": "2018-06-09T14:48:52Z",
+          "channelId": "UC60U_dcIxAcIkcFQhFy_M4w",
+          "title": "Orang Biasa - Karaoke Lirik | Zoel Anggara",
+          "description": "Song by: #ZoelAnggara Tittle: #orangbiasa Type of music: #karaoke Music by #swaranadaentertainment Video musik karaoke ini ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/Ae0fvJ-aR-s/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/Ae0fvJ-aR-s/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/Ae0fvJ-aR-s/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Swara Nada Entertainment",
+          "liveBroadcastContent": "none",
+          "publishTime": "2018-06-09T14:48:52Z"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "z_Mv13jpriMaHO8Ttys6QCxRAO0",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "L5t-8YP4U0A"
+        },
+        "snippet": {
+          "publishedAt": "2022-07-24T11:30:03Z",
+          "channelId": "UCwTRjvjVge51X-ILJ4i22ew",
+          "title": "Keyshia Cole - Love (Karaoke Version)",
+          "description": "Play Our Free Karaoke Game ⭐️ https://singking.link/Game_desc Karaoke sing along of “Love” by Keyshia Cole from Sing King ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/L5t-8YP4U0A/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/L5t-8YP4U0A/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/L5t-8YP4U0A/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "Sing King",
+          "liveBroadcastContent": "none",
+          "publishTime": "2022-07-24T11:30:03Z"
+        }
+      }
+    ]
+  }
+  

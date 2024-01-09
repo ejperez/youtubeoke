@@ -1,0 +1,23 @@
+.loader {
+  /* Uncomment this to make it run! */
+  /*
+         animation: loader 5s linear infinite;
+      */
+  position: absolute;
+  top: calc(50% - 20px);
+  left: calc(50% - 20px);
+}
+
+.loader-text {
+  text-align: center;
+  margin-top: 20%;
+}
+
+@keyframes loader {
+  0% {
+    left: -100px;
+  }
+  100% {
+    left: 110%;
+  }
+}

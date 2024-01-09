@@ -8,7 +8,7 @@ body {
   overflow-x: hidden;
   color: white;
   height: 100%;
-  background-color: #17052b;
+  background-color: #0f0f0f;
   font-family: "Roboto Condensed", sans-serif;
 }
 
@@ -26,7 +26,7 @@ body {
 
 #sidebar-wrapper {
   padding-top: 15px;
-  background-color: #17052b;
+  background-color: #0f0f0f;
   z-index: 1000;
   position: fixed;
   left: 250px;
@@ -94,82 +94,6 @@ body {
   font-family: "Anton", sans-serif;
 }
 
-.search-form {
-  margin-top: 20px;
-}
-
-.search-form input[type="text"] {
-  background-color: rgba(0, 0, 0, 0);
-  color: #fff;
-}
-
-.song-list {
-  list-style-type: none;
-  padding-left: 0;
-  overflow: auto;
-  margin-top: 20px;
-  padding-right: 1px;
-}
-
-.song-list-item {
-  background-color: rgba(0, 0, 0, 0);
-  padding: 5px;
-  color: #fff;
-  margin-bottom: 5px;
-  border: solid thin #fff;
-  border-radius: 5px;
-}
-
-.song-list-item .btn {
-  background-color: rgba(0, 0, 0, 0);
-  color: #fff;
-  border-color: #fff;
-}
-
-.song-list-item .btn:hover {
-  background-color: #fff;
-  color: #000;
-}
-
-.song-list-title {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.btn-default .badge {
-  color: #000;
-  background-color: #fff;
-  top: -2px;
-}
-
-.tab-name {
-  font-size: 20px;
-}
-
-.loader {
-  /* Uncomment this to make it run! */
-  /*
-       animation: loader 5s linear infinite;
-    */
-  position: absolute;
-  top: calc(50% - 20px);
-  left: calc(50% - 20px);
-}
-
-.loader-text {
-  text-align: center;
-  margin-top: 20%;
-}
-
-@keyframes loader {
-  0% {
-    left: -100px;
-  }
-  100% {
-    left: 110%;
-  }
-}
-
 .box {
   width: 50px;
   height: 50px;
@@ -231,8 +155,8 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px #fff;
-  border-radius: 5px;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
 }
 
 /* Handle */

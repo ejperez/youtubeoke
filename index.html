@@ -23,14 +23,14 @@
     />
 
     <!-- Custom styles for this template -->
-    <link href="css/simple-sidebar.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
 
     <style>
       .overlay {
         position: fixed;
         width: 100%;
         height: 100%;
-        background-color: #17052b;
+        background-color: #0f0f0f;
         z-index: 1;
       }
     </style>
@@ -114,7 +114,7 @@
                   v-bind:style="{ height : searchListHeight + 'px' }"
                 >
                   <li class="song-list-item" v-for="item in searchResults">
-                    <div>
+                    <div class="song-list-item-wrapper">
                       <img
                         class="img-responsive song-list-image"
                         v-bind:src="item.image"
@@ -123,20 +123,24 @@
                         height="147"
                       />
 
-                      <h3 class="song-list-title">{{ item.title }}</h3>
+                      <div class="song-list-item-options text-center">
+                        <div class="song-list-item-cta">
+                          <button
+                            type="button"
+                            class="btn btn-lg"
+                            v-on:click="addToPlaylist( item )"
+                            title="Add to playlist"
+                          >
+                            <span class="glyphicon glyphicon-plus"></span>
+                          </button>
+                        </div>
 
-                      <sup>{{ item.channel }}</sup>
+                        <div class="song-list-item-channel">
+                          <span class="glyphicon glyphicon-expand"></span> {{
+                          item.channel }}
+                        </div>
+                      </div>
                     </div>
-
-                    <button
-                      class="btn btn-xs"
-                      v-on:click="addToPlaylist( item )"
-                    >
-                      Add to playlist
-                    </button>
-                    <button class="btn btn-xs" v-on:click="playSong( item )">
-                      Play
-                    </button>
                   </li>
                 </ul>
 
@@ -201,11 +205,7 @@
                 <p v-if="currentSong">
                   Now playing | <strong>{{ currentSong.title }}</strong>
                 </p>
-                <p v-else>
-                  Search or select a song to begin. Using dual screen mode?
-                  Click
-                  <a href="https://ejperez.github.io/youtubeoke-dual/">here</a>.
-                </p>
+                <p v-else>Search or select a song to begin.</p>
               </div>
               <div class="col-md-12">
                 <div

@@ -86,10 +86,11 @@ window.onload = function () {
 
         vm.isLoading = true;
 
-        fetch(
-          "https://ejpentertainment.000webhostapp.com?q=" +
-            encodeURIComponent(this.formData.q)
-        )
+        // fetch(
+        //   "https://ejpentertainment.000webhostapp.com?q=" +
+        //     encodeURIComponent(this.formData.q)
+        // )
+        fetch("test.json")
           .then((response) => response.json())
           .then((data) => {
             vm.searchResults = [];
@@ -150,16 +151,4 @@ window.onload = function () {
       },
     },
   }).mount("#app");
-};
-
-window.onbeforeunload = function (e) {
-  e = e || window.event;
-
-  // For IE and Firefox prior to version 4
-  if (e) {
-    e.returnValue = "Are you sure? Your playlist will be gone.";
-  }
-
-  // For Safari
-  return "Are you sure? Your playlist will be gone.";
 };

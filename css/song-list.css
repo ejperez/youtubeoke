@@ -1,0 +1,78 @@
+.search-form {
+  margin-top: 20px;
+}
+
+.search-form input[type="text"] {
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+}
+
+.btn-default .badge {
+  color: #000;
+  background-color: #fff;
+  top: -2px;
+}
+
+.tab-name {
+  font-size: 20px;
+}
+
+.song-list {
+  list-style-type: none;
+  padding-left: 0;
+  overflow: auto;
+  margin-top: 20px;
+  padding-right: 1px;
+}
+
+/* .song-list-item { */
+/* padding: 5px; */
+/* color: #fff; */
+/* margin-bottom: 5px; */
+/* } */
+
+.song-list-item-wrapper {
+  /* border: solid 1px rgba(0,0,0,0); */
+  margin: 0 10px 10px 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* .song-list-item-wrapper:hover {
+  cursor: pointer;
+} */
+
+.song-list-item-wrapper:hover .song-list-item-options {
+  height: 100%;
+}
+
+.song-list-item-options {
+  /* transition: all;
+  transition-duration: 200ms;
+  animation-timing-function: ease-in-out; */
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  height: 0%;
+  font-size: 12px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.song-list-item-channel {
+  margin-top: 10px;
+}
+
+.song-list-item-cta {
+  margin-top: 20px;
+}
+
+.song-list-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn:visited {
+    color: white;
+}
