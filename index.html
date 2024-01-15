@@ -66,7 +66,7 @@
                     <button
                       v-on:click="showTab( 1 )"
                       type="button"
-                      class="btn btn-lg btn-default"
+                      class="btn btn-md btn-default"
                       v-bind:class="{ active : activeTab === 1 }"
                       title="Search"
                     >
@@ -77,12 +77,11 @@
                     <button
                       v-on:click="showTab( 2 )"
                       type="button"
-                      class="btn btn-lg btn-default"
+                      class="btn btn-md btn-default"
                       v-bind:class="{ active : activeTab === 2 }"
                       title="Playlist"
                     >
-                      <span class="glyphicon glyphicon-list"></span>
-                      <span class="badge">{{ playlist.length }}</span>
+                      <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="badge">{{ playlist.length }}</span>
                     </button>
                   </div>
                 </div>
@@ -100,8 +99,11 @@
                         placeholder="Search for..."
                       />
                       <span class="input-group-btn"
-                        ><button class="btn btn-default">Go!</button></span
-                      >
+                        ><button class="btn btn-default" title="Search">
+                          <span
+                            class="glyphicon glyphicon-search"
+                          ></span></button
+                      ></span>
                     </div>
                   </fieldset>
                 </form>
@@ -114,7 +116,11 @@
                   v-bind:style="{ height : searchListHeight + 'px' }"
                 >
                   <li class="song-list-item" v-for="item in searchResults">
-                    <div class="song-list-item-wrapper">
+                    <div
+                      class="song-list-item-wrapper"
+                      v-on:click="addToPlaylist( item )"
+                      title="Add to playlist"
+                    >
                       <img
                         class="img-responsive song-list-image"
                         v-bind:src="item.image"
@@ -123,22 +129,15 @@
                         height="147"
                       />
 
-                      <div class="song-list-item-options text-center">
-                        <div class="song-list-item-cta">
-                          <button
-                            type="button"
-                            class="btn btn-lg"
-                            v-on:click="addToPlaylist( item )"
-                            title="Add to playlist"
-                          >
-                            <span class="glyphicon glyphicon-plus"></span>
-                          </button>
-                        </div>
-
-                        <div class="song-list-item-channel">
-                          <span class="glyphicon glyphicon-expand"></span> {{
-                          item.channel }}
-                        </div>
+                      <div class="song-list-item-options text-right">
+                        <button
+                          type="button"
+                          class="btn btn-sm"
+                          v-on:click="addToPlaylist( item )"
+                          title="Add to playlist"
+                        >
+                          <span class="glyphicon glyphicon-plus"></span>
+                        </button>
                       </div>
                     </div>
                   </li>
