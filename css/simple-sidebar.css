@@ -83,6 +83,8 @@ body {
   border-color: #fff;
   color: #aaa;
   border: none;
+  outline: none!important;
+  transition: none;
 }
 
 .btn:hover,
@@ -94,8 +96,7 @@ body {
 
 .btn.active {
   background-color: #777;
-  color: white;
-  transition: none;
+  color: white;  
 }
 
 .btn.active:hover,

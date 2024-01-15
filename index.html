@@ -81,7 +81,10 @@
                       v-bind:class="{ active : activeTab === 2 }"
                       title="Playlist"
                     >
-                      <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="badge">{{ playlist.length }}</span>
+                      <span class="glyphicon glyphicon-list"></span>&nbsp;<span
+                        class="badge"
+                        >{{ playlist.length }}</span
+                      >
                     </button>
                   </div>
                 </div>
@@ -143,7 +146,7 @@
                   </li>
                 </ul>
 
-                <p v-else><br />No songs.</p>
+                <p v-else><br />No results</p>
               </div>
               <div class="col-md-12" v-bind:class="{ hide: activeTab !== 2}">
                 <ul
@@ -153,7 +156,7 @@
                   v-bind:style="{ height : playListHeight + 'px' }"
                 >
                   <li class="song-list-item" v-for="(item, index) in playlist">
-                    <div>
+                    <div class="song-list-item-wrapper">
                       <img
                         class="img-responsive song-list-image"
                         v-bind:src="item.image"
@@ -162,23 +165,21 @@
                         height="147"
                       />
 
-                      <h3 class="song-list-title">{{ item.title }}</h3>
-
-                      <sup>{{ item.channel }}</sup>
+                      <div class="song-list-item-options text-right">
+                        <button
+                          class="btn btn-sm"
+                          @click="playSongFromPlaylist( item, index )"
+                        >
+                          <span class="glyphicon glyphicon-play"></span></button
+                        >&nbsp;
+                        <button class="btn btn-sm" @click="deleteSong( index )">
+                          <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                      </div>
                     </div>
-
-                    <button
-                      class="btn btn-xs"
-                      v-on:click="playSongFromPlaylist( item, index )"
-                    >
-                      Play
-                    </button>
-                    <button class="btn btn-xs" v-on:click="deleteSong( index )">
-                      Delete
-                    </button>
                   </li>
                 </ul>
-                <p v-else><br />No songs.</p>
+                <p v-else><br />No reserved songs</p>
               </div>
             </div>
           </div>
