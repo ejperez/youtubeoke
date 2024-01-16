@@ -44,7 +44,6 @@
   margin: 0 10px 10px 0;
   position: relative;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .song-list-item-wrapper img {
@@ -65,7 +64,7 @@
 }
 
 .song-list-item-options .btn:focus,
-.song-list-item-wrapper:hover .btn {
+.song-list-item-options .btn:hover {
   background-color: red;
   outline: none;
 }

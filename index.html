@@ -119,11 +119,7 @@
                   v-bind:style="{ height : searchListHeight + 'px' }"
                 >
                   <li class="song-list-item" v-for="item in searchResults">
-                    <div
-                      class="song-list-item-wrapper"
-                      v-on:click="addToPlaylist( item )"
-                      title="Add to playlist"
-                    >
+                    <div class="song-list-item-wrapper">
                       <img
                         class="img-responsive song-list-image"
                         v-bind:src="item.image"
@@ -137,7 +133,7 @@
                           type="button"
                           class="btn btn-sm"
                           v-on:click="addToPlaylist( item )"
-                          title="Add to playlist"
+                          title="Reserve"
                         >
                           <span class="glyphicon glyphicon-plus"></span>
                         </button>
@@ -169,10 +165,15 @@
                         <button
                           class="btn btn-sm"
                           @click="playSongFromPlaylist( item, index )"
+                          title="Play"
                         >
                           <span class="glyphicon glyphicon-play"></span></button
                         >&nbsp;
-                        <button class="btn btn-sm" @click="deleteSong( index )">
+                        <button
+                          class="btn btn-sm"
+                          @click="deleteSong( index )"
+                          title="Remove"
+                        >
                           <span class="glyphicon glyphicon-minus"></span>
                         </button>
                       </div>
@@ -202,10 +203,15 @@
                     <h1 class="brand">Youtubeoke</h1>
                   </div>
                 </template>
-                <p v-if="currentSong">
-                  Now playing | <strong>{{ currentSong.title }}</strong>
-                </p>
-                <p v-else>Search or select a song to begin.</p>
+                <div v-if="currentSong" class="container-fluid">
+                  <div class="row">
+                    <div class="column col-md-6">
+                      Now playing | <strong>{{ currentSong.title }}</strong> {{
+                      currentSong.channel}}
+                    </div>
+                  </div>
+                </div>
+                <div v-else>Search or select a song to begin.</div>
               </div>
               <div class="col-md-12">
                 <div
