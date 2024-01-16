@@ -86,11 +86,10 @@ window.onload = function () {
 
         vm.isLoading = true;
 
-        // fetch(
-        //   "https://ejpentertainment.000webhostapp.com?q=" +
-        //     encodeURIComponent(this.formData.q)
-        // )
-        fetch("test.json")
+        fetch(
+          "https://ejpentertainment.000webhostapp.com?q=" +
+            encodeURIComponent(this.formData.q)
+        )
           .then((response) => response.json())
           .then((data) => {
             vm.searchResults = [];
