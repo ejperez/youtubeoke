@@ -119,10 +119,16 @@
                   v-bind:style="{ height : searchListHeight + 'px' }"
                 >
                   <li class="song-list-item" v-for="item in searchResults">
-                    <div class="song-list-item-wrapper">
+                    <a
+                      href="#"
+                      class="song-list-item-wrapper"
+                      @click.stop.prevent="playSong(item)"
+                      title="Play"
+                    >
                       <img
                         class="img-responsive song-list-image"
-                        v-bind:src="item.image"
+                        loading="lazy"
+                        :src="item.image"
                         alt=""
                         width="220"
                         height="147"
@@ -132,13 +138,13 @@
                         <button
                           type="button"
                           class="btn btn-sm"
-                          v-on:click="addToPlaylist( item )"
+                          @click.stop.prevent="addToPlaylist( item )"
                           title="Reserve"
                         >
                           <span class="glyphicon glyphicon-plus"></span>
                         </button>
                       </div>
-                    </div>
+                    </a>
                   </li>
                 </ul>
 
@@ -152,10 +158,15 @@
                   v-bind:style="{ height : playListHeight + 'px' }"
                 >
                   <li class="song-list-item" v-for="(item, index) in playlist">
-                    <div class="song-list-item-wrapper">
+                    <a
+                      href="#"
+                      class="song-list-item-wrapper"
+                      @click.stop.prevent="playSongFromPlaylist(item, index)"
+                      title="Play"
+                    >
                       <img
                         class="img-responsive song-list-image"
-                        v-bind:src="item.image"
+                        :src="item.image"
                         alt=""
                         width="220"
                         height="147"
@@ -164,20 +175,13 @@
                       <div class="song-list-item-options text-right">
                         <button
                           class="btn btn-sm"
-                          @click="playSongFromPlaylist( item, index )"
-                          title="Play"
-                        >
-                          <span class="glyphicon glyphicon-play"></span></button
-                        >&nbsp;
-                        <button
-                          class="btn btn-sm"
-                          @click="deleteSong( index )"
+                          @click.stop.prevent="deleteSong( index )"
                           title="Remove"
                         >
                           <span class="glyphicon glyphicon-minus"></span>
                         </button>
                       </div>
-                    </div>
+                    </a>
                   </li>
                 </ul>
                 <p v-else><br />No reserved songs</p>
@@ -191,9 +195,9 @@
         <div id="page-content-wrapper">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-12 text-center">
+              <div class="col-md-12">
                 <template v-if="!currentSong">
-                  <div>
+                  <div class="text-center">
                     <img
                       class="logo"
                       src="images/logo_trans.png"
@@ -205,17 +209,33 @@
                 </template>
                 <div v-if="currentSong" class="container-fluid">
                   <div class="row">
-                    <div class="column col-md-6">
-                      Now playing | <strong>{{ currentSong.title }}</strong> {{
-                      currentSong.channel}}
-                    </div>
+                    <template v-if="nextSong() === null">
+                      <div class="column col-md-12 text-center">
+                        Now playing |
+                        <strong>{{ currentSong.title }}</strong> {{
+                        currentSong.channel}}
+                      </div>
+                    </template>
+                    <template v-else>
+                      <div class="column col-md-6">
+                        Now playing |
+                        <strong>{{ currentSong.title }}</strong> {{
+                        currentSong.channel}}
+                      </div>
+                      <div class="column col-md-6 text-right">
+                        Next | <strong>{{ nextSong().title }}</strong> {{
+                        nextSong().channel}}
+                      </div>
+                    </template>
                   </div>
                 </div>
-                <div v-else>Search or select a song to begin.</div>
+                <div v-else class="text-center">
+                  Search or select a song to begin.
+                </div>
               </div>
               <div class="col-md-12">
                 <div
-                  v-bind:class="{ hide: !showPlayer }"
+                  :class="{ hide: !showPlayer }"
                   class="embed-responsive embed-responsive-16by9"
                 >
                   <div id="player"></div>

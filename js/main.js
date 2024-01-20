@@ -12,13 +12,6 @@ window.onload = function () {
   const { createApp } = Vue;
 
   createApp({
-    computed() {
-      return {
-        playlistCount() {
-          return this.playlist.length;
-        },
-      };
-    },
     data() {
       return {
         showOverlay: true,
@@ -78,6 +71,9 @@ window.onload = function () {
       vm.resizeList();
     },
     methods: {
+      nextSong() {
+        return this.playlist.length === 0 ? null : this.playlist[0];
+      },
       addToPlaylist(item) {
         this.playlist.push(item);
       },
