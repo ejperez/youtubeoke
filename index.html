@@ -1,256 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="Online Videoke" />
-    <meta name="author" content="EJ Perez" />
 
-    <title>Youtubeoke | Online Videoke</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="Online Videoke" />
+  <meta name="author" content="EJ Perez" />
 
-    <!-- Bootstrap core CSS -->
-    <link rel="icon" type="image/png" href="images/logo.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Anton|Roboto+Condensed"
-      rel="stylesheet"
-    />
+  <title>Youtubeoke | Online Videoke</title>
 
-    <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet" />
+  <!-- Bootstrap core CSS -->
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Anton|Roboto+Condensed" rel="stylesheet" />
 
-    <style>
-      .overlay {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background-color: #0f0f0f;
-        z-index: 1;
-      }
-    </style>
-  </head>
+  <!-- Custom styles for this template -->
+  <link href="css/main.css" rel="stylesheet" />
 
-  <body>
-    <div id="app">
-      <div id="wrapper" :class="{ toggled : isSideMenuShown }">
-        <div class="overlay" v-if="showOverlay">
-          <div class="loader">
-            <div class="shadow"></div>
-            <div class="box"></div>
-          </div>
-          <h1 class="loader-text">Welcome great singers!</h1>
+  <style>
+    .overlay {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: #0f0f0f;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div id="wrapper" :class="{ toggled : isSideMenuShown }">
+      <div class="overlay" v-if="showOverlay">
+        <div class="loader">
+          <div class="shadow"></div>
+          <div class="box"></div>
         </div>
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <div v-if="isLoading" class="loader">
-            <div class="shadow"></div>
-            <div class="box"></div>
-          </div>
-
-          <div v-if="!isLoading" class="container-fluid">
-            <div class="row">
-              <div class="col-sm-12">
-                <div
-                  class="btn-group btn-group-justified"
-                  role="group"
-                  aria-label="..."
-                >
-                  <div class="btn-group" role="group" aria-label="...">
-                    <button
-                      v-on:click="showTab( 1 )"
-                      type="button"
-                      class="btn btn-md btn-default"
-                      v-bind:class="{ active : activeTab === 1 }"
-                      title="Search"
-                    >
-                      <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                  </div>
-                  <div class="btn-group" role="group" aria-label="...">
-                    <button
-                      v-on:click="showTab( 2 )"
-                      type="button"
-                      class="btn btn-md btn-default"
-                      v-bind:class="{ active : activeTab === 2 }"
-                      title="Playlist"
-                    >
-                      <span class="glyphicon glyphicon-list"></span>&nbsp;<span
-                        class="badge"
-                        >{{ playlist.length }}</span
-                      >
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12" v-bind:class="{ hide: activeTab !== 1}">
-                <form class="form search-form" v-on:submit.prevent="searchSong">
-                  <fieldset>
-                    <div class="input-group">
-                      <input
-                        v-model="formData.q"
-                        type="text"
-                        class="form-control"
-                        placeholder="Search for..."
-                      />
-                      <span class="input-group-btn"
-                        ><button class="btn btn-default" title="Search">
-                          <span
-                            class="glyphicon glyphicon-search"
-                          ></span></button
-                      ></span>
-                    </div>
-                  </fieldset>
-                </form>
-              </div>
-              <div class="col-md-12" v-bind:class="{ hide: activeTab !== 1}">
-                <ul
-                  id="js-search-list"
-                  class="song-list"
-                  v-if="searchResults.length"
-                  v-bind:style="{ height : searchListHeight + 'px' }"
-                >
-                  <li class="song-list-item" v-for="item in searchResults">
-                    <a
-                      href="#"
-                      class="song-list-item-wrapper"
-                      @click.stop.prevent="playSong(item)"
-                      title="Play"
-                    >
-                      <img
-                        class="img-responsive song-list-image"
-                        loading="lazy"
-                        :src="item.image"
-                        alt=""
-                        width="220"
-                        height="147"
-                      />
-
-                      <div class="song-list-item-options text-right">
-                        <button
-                          type="button"
-                          class="btn btn-sm"
-                          @click.stop.prevent="addToPlaylist( item )"
-                          title="Reserve"
-                        >
-                          <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-
-                <p v-else><br />No results</p>
-              </div>
-              <div class="col-md-12" v-bind:class="{ hide: activeTab !== 2}">
-                <ul
-                  id="js-play-list"
-                  class="song-list"
-                  v-if="playlist.length"
-                  v-bind:style="{ height : playListHeight + 'px' }"
-                >
-                  <li class="song-list-item" v-for="(item, index) in playlist">
-                    <a
-                      href="#"
-                      class="song-list-item-wrapper"
-                      @click.stop.prevent="playSongFromPlaylist(item, index)"
-                      title="Play"
-                    >
-                      <img
-                        class="img-responsive song-list-image"
-                        :src="item.image"
-                        alt=""
-                        width="220"
-                        height="147"
-                      />
-
-                      <div class="song-list-item-options text-right">
-                        <button
-                          class="btn btn-sm"
-                          @click.stop.prevent="deleteSong( index )"
-                          title="Remove"
-                        >
-                          <span class="glyphicon glyphicon-minus"></span>
-                        </button>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-                <p v-else><br />No reserved songs</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
-                <template v-if="!currentSong">
-                  <div class="text-center">
-                    <img
-                      class="logo"
-                      src="images/logo_trans.png"
-                      alt=""
-                      v-bind:style="{ marginTop : logoMarginTop + 'px' }"
-                    />
-                    <h1 class="brand">Youtubeoke</h1>
-                  </div>
-                </template>
-                <div v-if="currentSong" class="container-fluid">
-                  <div class="row">
-                    <template v-if="nextSong() === null">
-                      <div class="column col-md-12 text-center">
-                        Now playing |
-                        <strong>{{ currentSong.title }}</strong> {{
-                        currentSong.channel}}
-                      </div>
-                    </template>
-                    <template v-else>
-                      <div class="column col-md-6">
-                        Now playing |
-                        <strong>{{ currentSong.title }}</strong> {{
-                        currentSong.channel}}
-                      </div>
-                      <div class="column col-md-6 text-right">
-                        Next | <strong>{{ nextSong().title }}</strong> {{
-                        nextSong().channel}}
-                      </div>
-                    </template>
-                  </div>
-                </div>
-                <div v-else class="text-center">
-                  Search or select a song to begin.
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div
-                  :class="{ hide: !showPlayer }"
-                  class="embed-responsive embed-responsive-16by9"
-                >
-                  <div id="player"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /#page-content-wrapper -->
+        <h1 class="loader-text">Welcome great singers!</h1>
       </div>
-      <!-- /#wrapper -->
-    </div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="https://unpkg.com/vue@3.4.5/dist/vue.global.prod.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <div v-if="isLoading" class="loader">
+          <div class="shadow"></div>
+          <div class="box"></div>
+        </div>
+
+        <div v-if="!isLoading" class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group" role="group" aria-label="...">
+                  <button v-on:click="showTab( 1 )" type="button" class="btn btn-md btn-default"
+                    v-bind:class="{ active : activeTab === 1 }" title="Search">
+                    <span class="glyphicon glyphicon-search"></span>
+                  </button>
+                </div>
+                <div class="btn-group" role="group" aria-label="...">
+                  <button v-on:click="showTab( 2 )" type="button" class="btn btn-md btn-default"
+                    v-bind:class="{ active : activeTab === 2 }" title="Playlist">
+                    <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="badge">{{ playlist.length }}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" v-bind:class="{ hide: activeTab !== 1}">
+              <form class="form search-form" v-on:submit.prevent="searchSong">
+                <fieldset>
+                  <div class="input-group">
+                    <input v-model="formData.q" type="text" class="form-control" placeholder="Search for..." />
+                    <span class="input-group-btn"><button class="btn btn-default" title="Search">
+                        <span class="glyphicon glyphicon-search"></span></button></span>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+            <div class="col-md-12" v-bind:class="{ hide: activeTab !== 1}">
+              <ul id="js-search-list" class="song-list" v-if="searchResults.length"
+                v-bind:style="{ height : searchListHeight + 'px' }">
+                <li class="song-list-item" v-for="item in searchResults">
+                  <a href="#" class="song-list-item-wrapper" @click.stop.prevent="playSong(item)" title="Play">
+                    <img class="img-responsive song-list-image" loading="lazy" :src="item.image" alt="" width="220"
+                      height="147" />
+
+                    <div class="song-list-item-options text-right">
+                      <button type="button" class="btn btn-sm" @click.stop.prevent="addToPlaylist( item )"
+                        title="Reserve">
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </button>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+
+              <p v-else><br />No results</p>
+            </div>
+            <div class="col-md-12" v-bind:class="{ hide: activeTab !== 2}">
+              <ul id="js-play-list" class="song-list" v-if="playlist.length"
+                v-bind:style="{ height : playListHeight + 'px' }">
+                <li class="song-list-item" v-for="(item, index) in playlist">
+                  <a href="#" class="song-list-item-wrapper" @click.stop.prevent="playSongFromPlaylist(item, index)"
+                    title="Play">
+                    <img class="img-responsive song-list-image" :src="item.image" alt="" width="220" height="147" />
+
+                    <div class="song-list-item-options text-right">
+                      <button class="btn btn-sm" @click.stop.prevent="deleteSong( index )" title="Remove">
+                        <span class="glyphicon glyphicon-minus"></span>
+                      </button>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+              <p v-else><br />No reserved songs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <template v-if="!currentSong">
+                <div class="text-center">
+                  <img class="logo" src="images/logo_trans.png" alt=""
+                    v-bind:style="{ marginTop : logoMarginTop + 'px' }" />
+                  <h1 class="brand">Youtubeoke</h1>
+                </div>
+              </template>
+              <div v-if="currentSong" class="container-fluid">
+                <div class="row">
+                  <template v-if="nextSong() === null">
+                    <div class="column col-md-12 text-center">
+                      Now playing |
+                      <strong>{{ currentSong.title }}</strong> {{
+                      currentSong.channel}}
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div class="column col-md-6">
+                      Now playing |
+                      <strong>{{ currentSong.title }}</strong> {{
+                      currentSong.channel}}
+                    </div>
+                    <div class="column col-md-6 text-right">
+                      Next | <strong>{{ nextSong().title }}</strong> {{
+                      nextSong().channel}}
+                    </div>
+                  </template>
+                </div>
+              </div>
+              <div v-else class="text-center">
+                Search or select a song to begin.
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div :class="{ hide: !showPlayer }" class="embed-responsive embed-responsive-16by9">
+                <div id="player"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://unpkg.com/vue@3.4.5/dist/vue.global.prod.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
 </html>

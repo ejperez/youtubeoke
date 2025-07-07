@@ -5,8 +5,15 @@ function decodeEntity(inputStr) {
 }
 
 window.onload = function () {
-  if (!("Vue" in window)) {
+  if (!("Vue" in window) || !("localStorage" in window)) {
     return;
+  }
+
+  let backendAPI = localStorage.getItem("backend_api");
+
+  if (!backendAPI) {
+    backendAPI = prompt("Enter backend API URL");
+    localStorage.setItem("backend_api", backendAPI);
   }
 
   const { createApp } = Vue;
@@ -82,10 +89,9 @@ window.onload = function () {
 
         vm.isLoading = true;
 
-        fetch(
-          "https://ejpentertainment.000webhostapp.com?q=" +
-            encodeURIComponent(this.formData.q)
-        )
+        const q = encodeURIComponent(this.formData.q);
+
+        fetch(`${backendAPI}${q}`)
           .then((response) => response.json())
           .then((data) => {
             vm.searchResults = [];
