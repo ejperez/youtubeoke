@@ -24,6 +24,8 @@ function AnimatedBackground() {
 }
 
 export default function PlayerHome({ playerID, remoteLink }) {
+  const videoURL = `${import.meta.env.BASE_URL}video.mp4`;
+
   return (
     <div className="fixed flex flex-col h-full w-full justify-center items-center">
       <div className="z-2 text-center p-2">
@@ -51,7 +53,7 @@ export default function PlayerHome({ playerID, remoteLink }) {
         loop
         muted
       >
-        <source src="/video.mp4" type="video/mp4" />
+        <source src={videoURL} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>
