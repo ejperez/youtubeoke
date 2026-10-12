@@ -5,7 +5,6 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const rateLimit = require("express-rate-limit");
 const youtubesearchapi = require("youtube-search-api");
-const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
@@ -34,6 +33,9 @@ const io = new Server(server, {
   path: `${subFolder}/socket.io`,
 });
 
+// Serve static frontend
+app.use(`${subFolder}/`, express.static("./frontend/dist"));
+
 // Endpoints for searching YouTube
 const LIMIT = 100;
 const BLOCKED_CHANNELS = process.env.BLOCKED_CHANNELS || [];
@@ -52,8 +54,6 @@ const processResponse = (data, res) => {
     nextPage: data?.nextPage,
   });
 };
-
-app.use(`${subFolder}/`, express.static("./frontend/dist"));
 
 app.get(`${subFolder}/api/search/:q`, limiter, async (req, res) => {
   const data = await youtubesearchapi.GetListByKeyword(
