@@ -1,28 +1,6 @@
 import { QRCode } from "react-qr-code";
 import { Link } from "react-router";
 
-function AnimatedBackground() {
-  return (
-    <>
-      <div
-        className="fixed inset-y-0 -left-1/2 -right-1/2 -z-10 opacity-50
-         bg-[linear-gradient(-60deg,#f20_50%,#000_50%)]
-         animate-slide"
-      ></div>
-      <div
-        className="fixed inset-y-0 -left-1/2 -right-1/2 -z-10 opacity-50
-         bg-[linear-gradient(-60deg,#f20_50%,#000_50%)]
-         animate-slide [animation-duration:2s]"
-      ></div>
-      <div
-        className="fixed inset-y-0 -left-1/2 -right-1/2 -z-10 opacity-50
-         bg-[linear-gradient(-60deg,#f20_50%,#000_50%)]
-         animate-slide [animation-duration:3s]"
-      ></div>
-    </>
-  );
-}
-
 export default function PlayerHome({ playerID, remoteLink }) {
   const videoURL = `${import.meta.env.BASE_URL}video.mp4`;
 

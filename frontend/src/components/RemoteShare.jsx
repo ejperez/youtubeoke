@@ -1,4 +1,4 @@
-    import { QRCode } from "react-qr-code";
+import { QRCode } from "react-qr-code";
 
 export default function RemoteShare() {
   const remoteLink = document.location.href.replace("/share", "");
