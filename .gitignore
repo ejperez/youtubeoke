@@ -1,7 +1,3 @@
 node_modules
 downloads
 .env
-.env.local
-.env.production
-dist
-!frontend/dist
