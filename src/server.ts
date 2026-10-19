@@ -17,7 +17,6 @@ const videoDownloader = new VideoDownloader(
 );
 const videoDownloadQueue = new VideoDownloadQueue(videoDownloader);
 const videoFileManager = new VideoFileManager(DOWNLOAD_DIR);
-await videoFileManager.ready;
 const { server } = createApplication(videoDownloadQueue, videoFileManager);
 
 server.listen(PORT, () => {

@@ -7,9 +7,8 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "target": "ES2022", // Tells TS to allow modern features like top-level await
-    "module": "NodeNext", // Generates Node.js-compatible ES modules
-    "moduleResolution": "NodeNext", // Helps TS find imports correctly for Node.js
+    "module": "nodenext",
+    "target": "esnext",
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
