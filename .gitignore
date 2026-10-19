@@ -1,5 +1,6 @@
 node_modules
 downloads
 .env
+.env.local
 dist
 !frontend/dist
