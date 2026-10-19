@@ -1,59 +1,180 @@
-import useRemoteList from "../hooks/useRemoteList";
-import ErrorComponent from "./ErrorComponent";
-import List from "./List";
-import { AnimatedMessage } from "./Loader";
+import { useState, useEffect } from "react";
+import {
+  MdDownload,
+  MdDownloadDone,
+  MdOutlinePlaylistAdd,
+  MdOutlineDownloading,
+  MdOutlinePlaylistAddCheck,
+} from "react-icons/md";
 import useRemoteSearch from "../hooks/useRemoteSearch";
+import ErrorComponent from "./ErrorComponent";
+import SearchList from "./SearchList";
+import useRemoteDownloads from "../hooks/useRemoteDownloads";
+import { NO_DOWNLOADS } from "../util/config";
+import { emitEvent } from "../util/socket";
 
-export default function RemoteSearch() {
-  const { searchMenuOptions, listClickHandler, selectedVideo } =
-    useRemoteList();
+function SearchListItemOptions({ video }) {
+  const { download, latestDownloadedId, latestFailedId } = useRemoteDownloads();
 
+  const [isClicked, setIsClicked] = useState(false);
+
+  useEffect(() => {
+    if (latestFailedId === video.id) {
+      setIsClicked(false);
+    }
+  }, [latestFailedId]);
+
+  const handleClick = async (addToQueue = false) => {
+    await download(video.id, addToQueue);
+
+    setIsClicked(true);
+  };
+
+  return (
+    <div className="flex justify-end items-center grow">
+      {latestDownloadedId === video.id && isClicked ? (
+        <div className="flex items-center justify-center size-12">
+          <MdDownloadDone size={30} color="green" />
+        </div>
+      ) : isClicked ? (
+        <div className="flex items-center justify-center size-12">
+          <MdOutlineDownloading size={30} color="orange" />
+        </div>
+      ) : (
+        <>
+          <button
+            type="button"
+            className="flex items-center justify-center size-12"
+            onClick={() => {
+              handleClick(true);
+            }}
+          >
+            <MdOutlinePlaylistAdd size={30} />
+          </button>
+
+          <button
+            type="button"
+            className="flex items-center justify-center size-12"
+            onClick={() => {
+              handleClick();
+            }}
+          >
+            <MdDownload size={30} />
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
+
+function SearchListingItemNoDownloadOptions({ video }) {
+  const [isClicked, setIsClicked] = useState(false);
+
+  return isClicked ? (
+    <div className="flex items-center justify-center size-12">
+      <MdOutlinePlaylistAddCheck className="w-10" size={30} color="green" />
+    </div>
+  ) : (
+    <button
+      type="button"
+      className="flex items-center justify-center size-12"
+      onClick={() => {
+        setIsClicked(true);
+        emitEvent("add-to-queue", {
+          video: {
+            id: video.id,
+            isYT: true,
+            channelName: video.channel,
+            title: video.title,
+          },
+        });
+      }}
+    >
+      <MdOutlinePlaylistAdd size={30} />
+    </button>
+  );
+}
+
+function SearchForm({ setSearchTerm }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    if (data.search.trim() === "") return;
+
+    setSearchTerm(data.search + " karaoke");
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="w-full">
+      <input
+        name="search"
+        className="border-2 border-white w-full rounded-2xl p-2"
+        type="search"
+        placeholder="Search title, artist or channel name"
+      />
+    </form>
+  );
+}
+
+export default function RemoteSearch({ isActive }) {
   const {
-    loadMoreHandler,
-    currentItems,
-    currentHasNextPage,
-    isLoading,
+    items,
+    hasNextPage,
+    isLoadingMore,
+    isLoadingSearch,
     error,
+    searchTerm,
+    setSearchTerm,
+    loadMoreHandler,
   } = useRemoteSearch();
 
   return (
-    <div className="px-4">
-      {currentItems.length === 0 ? (
-        <div className="pb-2 text-sm font-bold">NO RESULTS</div>
-      ) : (
-        <>
-          <div className="pb-2 text-sm font-bold">SEARCH RESULTS</div>
+    <div className={`px-2 ${isActive ? "" : "hidden"}`}>
+      <SearchForm {...{ setSearchTerm }} />
+      <div className="mt-2">
+        {searchTerm === "" ? (
+          <div className="pb-2 text-sm">
+            The audience is waiting. Seach and pick a song from here.
+          </div>
+        ) : items.length === 0 && !isLoadingMore && !isLoadingSearch ? (
+          <div className="pb-2 text-sm font-bold">NO RESULTS</div>
+        ) : isLoadingSearch ? (
+          <div className="my-2 h-10">Loading results...</div>
+        ) : (
+          <>
+            <div className="pb-2 text-sm font-bold">SEARCH RESULTS</div>
 
-          <List
-            items={currentItems.filter(
-              (obj, index, self) =>
-                index === self.findIndex((o) => o.id === obj.id),
+            <SearchList
+              items={items.filter(
+                (obj, index, self) =>
+                  index === self.findIndex((o) => o.id === obj.id),
+              )}
+              OptionsElement={
+                NO_DOWNLOADS
+                  ? SearchListingItemNoDownloadOptions
+                  : SearchListItemOptions
+              }
+            />
+
+            {hasNextPage && !isLoadingMore && (
+              <button
+                className="w-full p-2 bg-white/30 my-2 rounded-2xl"
+                type="button"
+                onClick={loadMoreHandler}
+                disabled={isLoadingMore}
+              >
+                Load more
+              </button>
             )}
-            selectedItem={selectedVideo}
-            menuOptions={searchMenuOptions}
-            onSelect={listClickHandler}
-          />
 
-          {currentHasNextPage && !isLoading && (
-            <button
-              className="w-full p-2 bg-white/50 my-2 rounded-2xl"
-              type="button"
-              onClick={loadMoreHandler}
-              disabled={isLoading}
-            >
-              Load more
-            </button>
-          )}
+            {isLoadingMore && <div className="my-2 h-10">Loading more...</div>}
 
-          {isLoading && (
-            <div className="my-2 h-10">
-              <AnimatedMessage message="Loading more..." heightClass="h-10" />
-            </div>
-          )}
-
-          {error && <ErrorComponent className="mt-2" message={error} />}
-        </>
-      )}
+            {error && <ErrorComponent className="mt-2" message={error} />}
+          </>
+        )}
+      </div>
     </div>
   );
 }

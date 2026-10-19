@@ -1,14 +1,13 @@
 import { io } from "socket.io-client";
+import { BACKEND_URL } from "./config";
 
-const socket = io(import.meta.env.VITE_WS_URL || "http://localhost:3000", {
-  path: import.meta.env.VITE_WS_PATH || "/socket.io",
-});
+const socket = io(BACKEND_URL);
 
-const emitRemoteEvent = (socket, playerID, action, payload = {}) => {
+const emitEvent = (action, payload = {}) => {
   socket.emit("sync-event", {
-    action: action,
-    payload: { playerID: playerID, ...payload },
+    action,
+    payload,
   });
 };
 
-export { socket, emitRemoteEvent };
+export { socket, emitEvent };

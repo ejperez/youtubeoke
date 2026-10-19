@@ -1,11 +1,11 @@
 import YouTube from "react-youtube";
+import { NO_DOWNLOADS } from "../util/config";
 
-export default function PlayerFrame({
-  videoID,
-  onError,
-  onEnd,
-  onReady,
-  onStateChange,
+function YTPlayer({
+  videoPlayerRef,
+  currentVideo,
+  setHasError,
+  broadcastPlayerStatus,
 }) {
   const opts = {
     height: "1280",
@@ -27,17 +27,17 @@ export default function PlayerFrame({
   return (
     <YouTube
       className="w-screen h-screen"
-      videoId={videoID}
+      videoId={currentVideo.id}
       opts={opts}
       iframeClassName="h-full w-full"
       onStateChange={(event) => {
         switch (event.data) {
           case 0:
-            onEnd();
+            setIsShowingScore(true);
             break;
         }
 
-        onStateChange();
+        broadcastPlayerStatus();
 
         // Turn off subtitles by force
         if (typeof event.target.unloadModule === "function") {
@@ -45,8 +45,56 @@ export default function PlayerFrame({
           event.target.unloadModule("cc");
         }
       }}
-      onError={onError}
-      onReady={onReady}
+      onError={() => {
+        setHasError(true);
+      }}
+      onReady={(e) => {
+        videoPlayerRef.current = e.target;
+      }}
     />
   );
+}
+
+export default function PlayerFrame({
+  currentVideo,
+  videoPlayerRef,
+  setIsShowingScore,
+  setHasError,
+  broadcastPlayerStatus,
+}) {
+  if (NO_DOWNLOADS) {
+    return (
+      <YTPlayer
+        {...{
+          currentVideo,
+          setHasError,
+          broadcastPlayerStatus,
+          videoPlayerRef,
+        }}
+      />
+    );
+  } else
+    return (
+      <video
+        controlsList="nodownload nofullscreen"
+        onContextMenu={() => {
+          return false;
+        }}
+        src={currentVideo.filePath}
+        autoPlay
+        className="h-full w-full"
+        controls
+        onPlay={() => {
+          broadcastPlayerStatus();
+        }}
+        onPause={() => {
+          broadcastPlayerStatus();
+        }}
+        onEnded={() => {
+          broadcastPlayerStatus();
+          setIsShowingScore(true);
+        }}
+        ref={videoPlayerRef}
+      />
+    );
 }
