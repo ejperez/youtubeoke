@@ -1,27 +1,42 @@
 {
   "name": "youtubeoke",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "license": "ISC",
   "author": "",
   "type": "module",
   "scripts": {
     "dev": "tsx watch --env-file=.env.development src/server.ts",
-    "build": "tsc",
+    "dev:frontend": "vite frontend --config frontend/vite.config.js --mode development",
+    "build": "npm run build:server && npm run build:frontend",
+    "build:server": "tsc",
+    "build:frontend": "vite build frontend --config frontend/vite.config.js",
+    "lint": "eslint --config frontend/eslint.config.js frontend",
+    "preview:frontend": "vite preview frontend --config frontend/vite.config.js",
     "cleanup": "tsc --build --clean",
     "start": "node dist/server.js",
-    "import-videos": "npm run build && node scripts/import-videos.js",
-    "test:import-videos": "npm run build && node --test tests/import-videos.test.js",
-    "test:video-downloader": "npm run build && node --test tests/video-downloader.test.js",
-    "test:video-file-manager": "npm run build && node --test tests/video-file-manager.test.js"
+    "import-videos": "npm run build:server && node scripts/import-videos.js",
+    "test:import-videos": "npm run build:server && node --test tests/import-videos.test.js",
+    "test:video-downloader": "npm run build:server && node --test tests/video-downloader.test.js",
+    "test:video-file-manager": "npm run build:server && node --test tests/video-file-manager.test.js"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "better-queue": "^3.8.4",
+    "clsx": "^2.1.1",
     "cors": "^2.8.6",
     "dotenv": "^18.0.5",
     "express": "^5.2.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-icons": "^5.7.0",
+    "react-paginate": "^8.3.0",
+    "react-qr-code": "^2.2.0",
+    "react-youtube": "^10.1.0",
     "socket.io": "^4.8.4",
+    "socket.io-client": "^4.8.4",
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss": "^4.3.3",
     "youtube-search-api": "^2.0.1",
     "ytdlp-nodejs": "^3.4.5"
   },
@@ -30,10 +45,19 @@
     "esbuild@0.28.2": true
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/better-queue": "^3.8.6",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.4",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^10.10.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.6",
+    "globals": "^17.12.0",
+    "typescript": "^7.0.2",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "vite": "^8.3.0"
   }
 }

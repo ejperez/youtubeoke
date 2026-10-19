@@ -1,16 +1,22 @@
-# React + Vite
+# YouTubeoke
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The server and frontend share the root `package.json`, lockfile, and environment files. Run all npm commands from the repository root.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Install dependencies once with `npm install`, then start the server and frontend in separate terminals:
 
-## React Compiler
+- `npm run dev` starts the server.
+- `npm run dev:frontend` starts the Vite frontend.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The frontend runs on port 3001 and connects to the server on port 3000 by default.
 
-## Expanding the ESLint configuration
+## Build and lint
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `npm run build` builds the server and frontend.
+- `npm run lint` lints the frontend.
+- `npm run preview:frontend` previews the built frontend.
+
+## Environment
+
+Copy the root `.env.sample` to `.env` and adjust the server paths for your machine. Vite reads the same root env files; only variables prefixed with `VITE_` are exposed to frontend code. `.env.development` overrides matching values when running the frontend in development mode.
