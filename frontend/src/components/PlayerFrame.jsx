@@ -6,6 +6,7 @@ function YTPlayer({
   currentVideo,
   setHasError,
   broadcastPlayerStatus,
+  setIsShowingScore,
 }) {
   const opts = {
     height: "1280",
@@ -51,6 +52,10 @@ function YTPlayer({
       onReady={(e) => {
         videoPlayerRef.current = e.target;
       }}
+      onEnd={() => {
+        broadcastPlayerStatus();
+        setIsShowingScore(true);
+      }}
     />
   );
 }
@@ -70,6 +75,7 @@ export default function PlayerFrame({
           setHasError,
           broadcastPlayerStatus,
           videoPlayerRef,
+          setIsShowingScore,
         }}
       />
     );
