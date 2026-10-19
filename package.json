@@ -6,8 +6,8 @@
   "author": "",
   "type": "module",
   "scripts": {
-    "dev": "npx tsx watch src/server.ts",
-    "build": "npx tsc",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
     "cleanup": "tsc --build --clean",
     "start": "node dist/server.js",
     "import-videos": "npm run build && node scripts/import-videos.js",
