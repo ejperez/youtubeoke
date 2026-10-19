@@ -76,6 +76,10 @@ export default function PlayerFrame({
   } else
     return (
       <video
+        controlsList="nodownload nofullscreen"
+        onContextMenu={() => {
+          return false;
+        }}
         src={currentVideo.filePath}
         autoPlay
         className="h-full w-full"
