@@ -4,3 +4,4 @@ downloads
 .env.local
 .env.production
 dist
+!frontend/dist
