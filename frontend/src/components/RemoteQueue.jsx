@@ -1,47 +1,117 @@
-import List from "./List";
-import useRemoteList from "../hooks/useRemoteList";
-import { AnimatedMessage } from "./Loader";
+import SongList from "./SongList";
+import useRemoteQueue from "../hooks/useRemoteQueue";
+import { emitEvent } from "../util/socket";
+import {
+  MdOutlinePlaylistRemove,
+  MdOutlinePlayArrow,
+  MdOutlineRestartAlt,
+  MdOutlinePause,
+} from "react-icons/md";
+import { createContext, useContext } from "react";
 
-export default function RemoteQueue() {
-  const {
-    currentQueue,
-    currentVideo,
-    currentMenuOptions,
-    listClickHandler,
-    queueMenuOptions,
-    selectedVideo,
-    isQueueLoading,
-  } = useRemoteList();
+const QueueContext = createContext(null);
+
+function QueueListItemOptions({ video }) {
+  return (
+    <div className="flex justify-end items-center grow">
+      <button
+        type="button"
+        className="flex justify-center items-center size-12"
+      >
+        <MdOutlinePlayArrow
+          size={30}
+          onClick={() => {
+            emitEvent("play-video", { video });
+            emitEvent("remove-from-queue", { video });
+          }}
+        />
+      </button>
+      <button
+        type="button"
+        className="flex justify-center items-center size-12"
+      >
+        <MdOutlinePlaylistRemove
+          size={30}
+          onClick={() => {
+            emitEvent("remove-from-queue", { video });
+          }}
+        />
+      </button>
+    </div>
+  );
+}
+
+function CurrentVideoListItemOptions({ video }) {
+  const { playerIsPlaying } = useContext(QueueContext);
 
   return (
-    <div className="px-4">
-      <div className="pb-2 text-sm font-bold">NOW PLAYING</div>
-
-      {isQueueLoading ? (
-        <AnimatedMessage />
-      ) : (
-        <List
-          items={currentVideo ? [currentVideo] : null}
-          selectedItem={selectedVideo}
-          menuOptions={currentMenuOptions}
-          onSelect={listClickHandler}
-          emptyMessage="No song is playing"
+    <div className="flex justify-end items-center grow">
+      <button
+        type="button"
+        className="flex justify-center items-center size-12"
+      >
+        {playerIsPlaying ? (
+          <MdOutlinePause
+            size={30}
+            onClick={() => {
+              emitEvent("pause-current-video", { video });
+            }}
+          />
+        ) : (
+          <MdOutlinePlayArrow
+            size={30}
+            onClick={() => {
+              emitEvent("play-current-video", { video });
+            }}
+          />
+        )}
+      </button>
+      <button
+        type="button"
+        className="flex justify-center items-center size-12"
+      >
+        <MdOutlineRestartAlt
+          size={30}
+          onClick={() => {
+            emitEvent("restart-current-video", { video });
+          }}
         />
-      )}
-
-      <div className="pb-2 pt-4 text-sm font-bold">IN QUEUE</div>
-
-      {isQueueLoading ? (
-        <AnimatedMessage />
-      ) : (
-        <List
-          items={currentQueue}
-          selectedItem={selectedVideo}
-          menuOptions={queueMenuOptions}
-          onSelect={listClickHandler}
-          emptyMessage="Queue is empty"
-        />
-      )}
+      </button>
     </div>
+  );
+}
+
+export default function RemoteQueue({ isActive }) {
+  const { currentQueue, currentVideo, playerIsPlaying, isQueueLoading } =
+    useRemoteQueue();
+
+  return (
+    <QueueContext.Provider value={{ playerIsPlaying }}>
+      <div className={`px-4 ${isActive ? "" : "hidden"}`}>
+        <div className="pb-2 text-sm font-bold">NOW PLAYING</div>
+
+        {isQueueLoading ? (
+          <div className="my-2 h-10">Loading queue...</div>
+        ) : (
+          <SongList
+            items={currentVideo ? [currentVideo] : null}
+            emptyMessage="Nothing"
+            OptionsElement={CurrentVideoListItemOptions}
+          />
+        )}
+
+        <div className="pb-2 pt-4 text-sm font-bold">IN QUEUE</div>
+
+        {isQueueLoading ? (
+          <div className="my-2 h-10">Loading queue...</div>
+        ) : (
+          <SongList
+            items={currentQueue}
+            emptyMessage="Nothing"
+            OptionsElement={QueueListItemOptions}
+          />
+        )}
+      </div>
+    </QueueContext.Provider>
   );
 }

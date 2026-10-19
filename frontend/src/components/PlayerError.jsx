@@ -4,7 +4,7 @@ export default function PlayerError({ video, onSkip }) {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-full w-full text-2xl bg-red-950">
+    <div className="relative flex items-center justify-center w-full text-2xl bg-red-950 flex-1">
       <div className="text-center">
         <h2 className="my-4 text-4xl">Oops!</h2>
         We can't play the song "{video.title}"
