@@ -1,6 +1,6 @@
 import type { CorsOptions } from "cors";
-export declare const PORT: string | number;
-export declare const SERVER_IP: string;
+export declare const PORT: string | undefined;
+export declare const SERVER_IP: string | undefined;
 export declare const SERVER_URL: string;
 export declare const DOWNLOAD_DIR: string;
 export declare const FFMPEG_DIR: string;

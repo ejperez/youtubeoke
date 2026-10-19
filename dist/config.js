@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
-export const PORT = process.env.PORT || 3000;
-export const SERVER_IP = process.env.SERVER_IP || "localhost";
+export const PORT = process.env.PORT;
+export const SERVER_IP = process.env.SERVER_IP;
 export const SERVER_URL = `http://${SERVER_IP}:${PORT}`;
 export const DOWNLOAD_DIR = process.env.DOWNLOAD_DIR || "./downloads";
 export const FFMPEG_DIR = process.env.FFMPEG_DIR || "";
