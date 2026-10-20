@@ -1,4 +1,5 @@
 import youtubesearchapi, { type SearchResult } from "youtube-search-api";
+import { BLOCKED_CHANNELS } from "../config.js";
 
 const YT_ITEMS_PER_PAGE = 100;
 
@@ -21,6 +22,7 @@ export type SearchResponse = {
 const processResponse = (data: SearchResult): SearchResponse => ({
   items: data.items
     .filter((item) => item.type === "video")
+    .filter((item) => !BLOCKED_CHANNELS.includes(item.channelTitle || ""))
     .map((item) => {
       return {
         id: item.id,

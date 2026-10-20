@@ -9,6 +9,7 @@ export const SERVER_URL = `http://${SERVER_IP}:${PORT}`;
 export const DOWNLOAD_DIR = "downloads";
 export const FFMPEG_DIR = process.env.FFMPEG_DIR || "";
 export const YTDLP_BINARY = process.env.YTDLP_BINARY || "";
+export const BLOCKED_CHANNELS = process.env.BLOCKED_CHANNELS || "";
 
 export const corsOptions: CorsOptions = {
   origin: process.env.ALLOWED_ORIGINS || "*",
