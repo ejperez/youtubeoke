@@ -70,28 +70,32 @@ function SearchListItemOptions({ video }) {
 function SearchListingItemNoDownloadOptions({ video }) {
   const [isClicked, setIsClicked] = useState(false);
 
-  return isClicked ? (
-    <div className="flex items-center justify-center size-12">
-      <MdOutlinePlaylistAddCheck className="w-10" size={30} color="green" />
+  return (
+    <div className="flex justify-end items-center grow">
+      {isClicked ? (
+        <div className="flex items-center justify-center size-12">
+          <MdOutlinePlaylistAddCheck size={34} color="green" />
+        </div>
+      ) : (
+        <button
+          type="button"
+          className="flex items-center justify-center size-12"
+          onClick={() => {
+            setIsClicked(true);
+            emitEvent("add-to-queue", {
+              video: {
+                id: video.id,
+                isYT: true,
+                channelName: video.channel,
+                title: video.title,
+              },
+            });
+          }}
+        >
+          <MdOutlinePlaylistAdd size={30} />
+        </button>
+      )}
     </div>
-  ) : (
-    <button
-      type="button"
-      className="flex items-center justify-center size-12"
-      onClick={() => {
-        setIsClicked(true);
-        emitEvent("add-to-queue", {
-          video: {
-            id: video.id,
-            isYT: true,
-            channelName: video.channel,
-            title: video.title,
-          },
-        });
-      }}
-    >
-      <MdOutlinePlaylistAdd size={30} />
-    </button>
   );
 }
 
