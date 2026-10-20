@@ -76,7 +76,7 @@ export default function usePlayer() {
   }, [queue, currentVideo]);
 
   useEffect(() => {
-    socket.on("sync-event", (data) => {
+    const handleSyncEvent = (data) => {
       console.log(data);
 
       switch (data.action) {
@@ -131,10 +131,12 @@ export default function usePlayer() {
           broadcastPlayerStatus();
           break;
       }
-    });
+    };
+
+    socket.on("sync-event", handleSyncEvent);
 
     return () => {
-      socket.off("sync-event");
+      socket.off("sync-event", handleSyncEvent);
     };
   }, []);
 

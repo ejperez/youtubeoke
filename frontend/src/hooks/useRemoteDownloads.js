@@ -10,7 +10,7 @@ export default function useRemoteDownloads() {
 
   // Handle sync events from server
   useEffect(() => {
-    socket.on("sync-event", (data) => {
+    const handleSyncEvent = (data) => {
       console.log(data);
 
       switch (data.action) {
@@ -23,10 +23,12 @@ export default function useRemoteDownloads() {
 
           break;
       }
-    });
+    };
+
+    socket.on("sync-event", handleSyncEvent);
 
     return () => {
-      socket.off("sync-event");
+      socket.off("sync-event", handleSyncEvent);
     };
   }, []);
 

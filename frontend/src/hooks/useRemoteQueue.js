@@ -8,7 +8,7 @@ export default function useRemoteQueue() {
   const [playerIsPlaying, setPlayerIsPlaying] = useState(null);
 
   useEffect(() => {
-    socket.on("sync-event", (data) => {
+    const handleSyncEvent = (data) => {
       console.log(data);
 
       switch (data.action) {
@@ -23,13 +23,14 @@ export default function useRemoteQueue() {
 
           break;
       }
-    });
+    };
 
+    socket.on("sync-event", handleSyncEvent);
     emitEvent("get-queue");
     emitEvent("get-player-state");
 
     return () => {
-      socket.off("sync-event");
+      socket.off("sync-event", handleSyncEvent);
     };
   }, []);
 
