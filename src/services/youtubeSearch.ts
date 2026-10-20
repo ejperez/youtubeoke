@@ -2,13 +2,29 @@ import youtubesearchapi, { type SearchResult } from "youtube-search-api";
 
 const YT_ITEMS_PER_PAGE = 100;
 
-const processResponse = (data: SearchResult) => ({
+export type SearchResponseItem = {
+  id: string;
+  title: string;
+  channel: string | undefined;
+  image: string;
+  length: string;
+};
+
+export type SearchResponse = {
+  items: SearchResponseItem[];
+  nextPage: {
+    nextPageToken: string | null;
+    nextPageContext: any;
+  };
+};
+
+const processResponse = (data: SearchResult): SearchResponse => ({
   items: data.items
     .filter((item) => item.type === "video")
     .map((item) => {
       return {
-        id: item?.id,
-        title: item?.title,
+        id: item.id,
+        title: item.title,
         channel: item.channelTitle,
         image: item.thumbnail.thumbnails.shift()?.url,
         length: item.length.simpleText,

@@ -25,14 +25,22 @@ function SearchListItemOptions({ video }) {
   }, [latestFailedId]);
 
   const handleClick = async (addToQueue = false) => {
-    await download(video.id, addToQueue);
+    if (video.isDownloaded) {
+      emitEvent("request-add-to-queue", { video });
+    } else {
+      await download(video.id, addToQueue);
+    }
 
     setIsClicked(true);
   };
 
   return (
     <div className="flex justify-end items-center grow">
-      {latestDownloadedId === video.id && isClicked ? (
+      {video.isDownloaded && isClicked ? (
+        <div className="flex items-center justify-center size-12">
+          <MdOutlinePlaylistAddCheck size={30} color="green" />
+        </div>
+      ) : latestDownloadedId === video.id && isClicked ? (
         <div className="flex items-center justify-center size-12">
           <MdDownloadDone size={30} color="green" />
         </div>
@@ -52,15 +60,17 @@ function SearchListItemOptions({ video }) {
             <MdOutlinePlaylistAdd size={30} />
           </button>
 
-          <button
-            type="button"
-            className="flex items-center justify-center size-12"
-            onClick={() => {
-              handleClick();
-            }}
-          >
-            <MdDownload size={30} />
-          </button>
+          {!video.isDownloaded && (
+            <button
+              type="button"
+              className="flex items-center justify-center size-12"
+              onClick={() => {
+                handleClick();
+              }}
+            >
+              <MdDownload size={30} />
+            </button>
+          )}
         </>
       )}
     </div>
