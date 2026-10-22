@@ -20,6 +20,10 @@
     "test:video-downloader": "npm run build:server && node --test tests/video-downloader.test.js",
     "test:video-file-manager": "npm run build:server && node --test tests/video-file-manager.test.js"
   },
+  "allowScripts": {
+    "ytdlp-nodejs@3.4.5": true,
+    "esbuild@0.28.2": true
+  },
   "dependencies": {
     "better-queue": "^3.8.4",
     "cors": "^2.8.6",
