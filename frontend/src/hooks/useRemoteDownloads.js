@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { socket } from "../util/socket";
+import { getRoomId, socket } from "../util/socket";
 import { BACKEND_URL } from "../util/config";
 
 const BACKEND_API = BACKEND_URL + "/api/downloads";
@@ -38,7 +38,11 @@ export default function useRemoteDownloads() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id, add_to_queue: addToQueue }),
+      body: JSON.stringify({
+        id,
+        add_to_queue: addToQueue,
+        roomId: getRoomId(),
+      }),
     });
 
     return await response.json();

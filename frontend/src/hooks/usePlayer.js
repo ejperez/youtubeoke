@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { socket } from "../util/socket";
+import { emitEvent, joinRoom, socket } from "../util/socket";
 import { NO_DOWNLOADS } from "../util/config";
 
-export default function usePlayer() {
+export default function usePlayer(roomId) {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [queue, setQueueState] = useState([]);
   const [hasError, setHasError] = useState(false);
@@ -18,6 +18,7 @@ export default function usePlayer() {
   const queueRef = useRef(queue);
   const currentVideoRef = useRef(currentVideo);
   const videoPlayerRef = useRef(null);
+  const roomJoinedRef = useRef(false);
 
   const playNextInQueue = () => {
     setIsShowingScore(false);
@@ -38,12 +39,11 @@ export default function usePlayer() {
   }, [queue, currentVideo]);
 
   const broadcastQueue = () => {
-    socket.emit("sync-event", {
-      action: "current-queue",
-      payload: {
-        queue: queueRef.current,
-        currentVideo: currentVideoRef.current,
-      },
+    if (!roomJoinedRef.current) return;
+
+    emitEvent("current-queue", {
+      queue: queueRef.current,
+      currentVideo: currentVideoRef.current,
     });
   };
 
@@ -61,11 +61,10 @@ export default function usePlayer() {
   };
 
   const broadcastPlayerStatus = () => {
-    socket.emit("sync-event", {
-      action: "player-status-changed",
-      payload: {
-        isPlaying: isVideoPlayerPlaying(),
-      },
+    if (!roomJoinedRef.current) return;
+
+    emitEvent("player-status-changed", {
+      isPlaying: isVideoPlayerPlaying(),
     });
   };
 
@@ -139,6 +138,26 @@ export default function usePlayer() {
       socket.off("sync-event", handleSyncEvent);
     };
   }, []);
+
+  useEffect(() => {
+    let isActive = true;
+    roomJoinedRef.current = false;
+
+    joinRoom(roomId)
+      .then(() => {
+        if (!isActive) return;
+        roomJoinedRef.current = true;
+        broadcastQueue();
+      })
+      .catch((error) => {
+        console.error("Unable to join player room:", error);
+      });
+
+    return () => {
+      isActive = false;
+      roomJoinedRef.current = false;
+    };
+  }, [roomId]);
 
   const handleSkip = () => {
     playNextInQueue();

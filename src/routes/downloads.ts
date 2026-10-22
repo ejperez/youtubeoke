@@ -14,14 +14,18 @@ const createDownloadsRouter = (
     const {
       id,
       add_to_queue: addToQueue,
-    }: { id: string; add_to_queue?: boolean } = req.body;
+      roomId,
+    }: { id: string; add_to_queue?: boolean; roomId: string } = req.body;
     if (!id) return res.status(400).json({ error: "id is required" });
+    if (typeof roomId !== "string" || !/^\d{8}$/.test(roomId)) {
+      return res.status(400).json({ error: "A valid roomId is required" });
+    }
 
     videoDownloadQueue
       .getQueue()
       .push({ id })
       .on("finish", async function () {
-        io.emit("sync-event", {
+        io.to(roomId).emit("sync-event", {
           action: "download-finished",
           payload: { id },
         });
@@ -31,14 +35,14 @@ const createDownloadsRouter = (
         if (addToQueue) {
           const video = videoFileManager.getVideo(id);
 
-          io.emit("sync-event", {
+          io.to(roomId).emit("sync-event", {
             action: "add-to-queue",
             payload: { video },
           });
         }
       })
       .on("failed", function (err) {
-        io.emit("sync-event", {
+        io.to(roomId).emit("sync-event", {
           action: "download-failed",
           payload: { id },
         });

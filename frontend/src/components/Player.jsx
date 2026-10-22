@@ -4,8 +4,12 @@ import usePlayer from "../hooks/usePlayer";
 import PlayerScore from "./PlayerScore";
 import PlayerFrame from "./PlayerFrame";
 import PlayerError from "./PlayerError";
+import { useState } from "react";
 
 export default function Player() {
+  const [roomId] = useState(() =>
+    String(Math.floor(10_000_000 + Math.random() * 90_000_000)),
+  );
   const {
     currentVideo,
     queue,
@@ -17,8 +21,10 @@ export default function Player() {
     setHasError,
     handleSkip,
     broadcastPlayerStatus,
-  } = usePlayer();
-  const remoteLink = `${document.location.href}remote`;
+  } = usePlayer(roomId);
+  const remoteUrl = new URL("remote", document.location.href);
+  remoteUrl.searchParams.set("room", roomId);
+  const remoteLink = remoteUrl.toString();
 
   return (
     <div className="flex flex-col h-screen">
@@ -49,7 +55,7 @@ export default function Player() {
           )}
         </>
       ) : (
-        <PlayerHome remoteLink={remoteLink} />
+        <PlayerHome playerID={roomId} remoteLink={remoteLink} />
       )}
     </div>
   );

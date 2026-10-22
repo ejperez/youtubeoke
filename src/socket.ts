@@ -8,9 +8,27 @@ const registerSocketHandlers = (
   io.on("connection", (socket) => {
     console.log("User connected:", socket.id);
 
+    socket.on("join-room", async ({ roomId }, callback) => {
+      if (typeof roomId !== "string" || !/^\d{8}$/.test(roomId)) {
+        callback?.({ ok: false, error: "A valid eight-digit room is required." });
+        return;
+      }
+
+      const previousRoomId = socket.data.roomId as string | undefined;
+      if (previousRoomId && previousRoomId !== roomId) {
+        await socket.leave(previousRoomId);
+      }
+
+      await socket.join(roomId);
+      socket.data.roomId = roomId;
+      callback?.({ ok: true });
+    });
+
     socket.on("sync-event", (data) => {
-      console.log(data);
-      socket.broadcast.emit("sync-event", data);
+      const roomId = socket.data.roomId as string | undefined;
+      if (!roomId) return;
+
+      socket.to(roomId).emit("sync-event", data);
 
       switch (data.action) {
         case "request-add-to-queue":
@@ -18,7 +36,7 @@ const registerSocketHandlers = (
 
           if (!video) return;
 
-          socket.broadcast.emit("sync-event", {
+          socket.to(roomId).emit("sync-event", {
             action: "add-to-queue",
             payload: { video: { ...data.payload.video, ...video } },
           });
