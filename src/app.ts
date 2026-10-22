@@ -6,7 +6,7 @@ import { Server } from "socket.io";
 import { fileURLToPath } from "url";
 import type VideoDownloadQueue from "./VideoDownloadQueue.js";
 import type VideoFileManager from "./VideoFileManager.js";
-import { corsOptions, DOWNLOAD_DIR } from "./config.js";
+import { corsOptions, DOWNLOAD_DIR, NO_DOWNLOADS } from "./config.js";
 import createDownloadsRouter from "./routes/downloads.js";
 import createSearchRouter from "./routes/search.js";
 import createSongsRouter from "./routes/songs.js";
@@ -24,6 +24,11 @@ export const createApplication = (
 
   app.use(express.json());
   app.use(cors(corsOptions));
+
+  app.get("/api/config", (_, res) => {
+    res.setHeader("Cache-Control", "no-store");
+    res.json({ noDownloads: NO_DOWNLOADS });
+  });
 
   app.get("/remote", (_, res) => {
     res.sendFile(path.join(__dirname, "../frontend/dist", "remote.html"));

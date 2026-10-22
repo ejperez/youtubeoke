@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { emitEvent, joinRoom, socket } from "../util/socket";
-import { NO_DOWNLOADS } from "../util/config";
+import useRuntimeConfig from "../util/useRuntimeConfig";
 
 export default function usePlayer(roomId) {
+  const { noDownloads } = useRuntimeConfig();
   const [currentVideo, setCurrentVideo] = useState(null);
   const [queue, setQueueState] = useState([]);
   const [hasError, setHasError] = useState(false);
@@ -48,7 +49,7 @@ export default function usePlayer(roomId) {
   };
 
   const isVideoPlayerPlaying = () => {
-    if (NO_DOWNLOADS) {
+    if (noDownloads) {
       return (
         videoPlayerRef.current.getPlayerState() ===
         window.YT.PlayerState.PLAYING
@@ -97,7 +98,7 @@ export default function usePlayer(roomId) {
         case "restart-current-video":
           if (!videoPlayerRef.current) return;
 
-          if (NO_DOWNLOADS) {
+          if (noDownloads) {
             videoPlayerRef.current.seekTo(0);
             videoPlayerRef.current.playVideo();
           } else {
@@ -109,7 +110,7 @@ export default function usePlayer(roomId) {
         case "pause-current-video":
           if (!videoPlayerRef.current) return;
 
-          if (NO_DOWNLOADS) {
+          if (noDownloads) {
             videoPlayerRef.current.pauseVideo();
           } else {
             videoPlayerRef.current.pause();
@@ -119,7 +120,7 @@ export default function usePlayer(roomId) {
         case "play-current-video":
           if (!videoPlayerRef.current) return;
 
-          if (NO_DOWNLOADS) {
+          if (noDownloads) {
             videoPlayerRef.current.playVideo();
           } else {
             videoPlayerRef.current.play();

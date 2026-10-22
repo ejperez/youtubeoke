@@ -10,7 +10,7 @@ import useRemoteSearch from "../hooks/useRemoteSearch";
 import ErrorComponent from "./ErrorComponent";
 import SearchList from "./SearchList";
 import useRemoteDownloads from "../hooks/useRemoteDownloads";
-import { NO_DOWNLOADS } from "../util/config";
+import useRuntimeConfig from "../util/useRuntimeConfig";
 import { emitEvent } from "../util/socket";
 
 function SearchListItemOptions({ video }) {
@@ -133,6 +133,7 @@ function SearchForm({ setSearchTerm }) {
 }
 
 export default function RemoteSearch({ isActive }) {
+  const { noDownloads } = useRuntimeConfig();
   const {
     items,
     hasNextPage,
@@ -166,7 +167,7 @@ export default function RemoteSearch({ isActive }) {
                   index === self.findIndex((o) => o.id === obj.id),
               )}
               OptionsElement={
-                NO_DOWNLOADS
+                noDownloads
                   ? SearchListingItemNoDownloadOptions
                   : SearchListItemOptions
               }

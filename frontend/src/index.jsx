@@ -2,9 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import Player from "./components/Player";
+import { RuntimeConfigProvider } from "./util/RuntimeConfig";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Player />
+    <RuntimeConfigProvider>
+      <Player />
+    </RuntimeConfigProvider>
   </StrictMode>,
 );

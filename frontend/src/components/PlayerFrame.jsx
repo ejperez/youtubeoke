@@ -1,5 +1,5 @@
 import YouTube from "react-youtube";
-import { NO_DOWNLOADS } from "../util/config";
+import useRuntimeConfig from "../util/useRuntimeConfig";
 
 function YTPlayer({
   videoPlayerRef,
@@ -67,7 +67,9 @@ export default function PlayerFrame({
   setHasError,
   broadcastPlayerStatus,
 }) {
-  if (NO_DOWNLOADS) {
+  const { noDownloads } = useRuntimeConfig();
+
+  if (noDownloads) {
     return (
       <YTPlayer
         {...{
