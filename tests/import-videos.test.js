@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { VIDEO_DIR_DELIMITER } from "../dist/VideoDownloader.js";
+import { VIDEO_DIR_DELIMITER } from "../dist/config.js";
 import VideoFileManager from "../dist/VideoFileManager.js";
 import {
   generateImportedVideoId,

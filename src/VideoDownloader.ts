@@ -1,10 +1,8 @@
 import { YtDlp } from "ytdlp-nodejs";
-import { VIDEO_DIR_DELIMITER } from "./video-constants.js";
+import { VIDEO_DIR_DELIMITER } from "./config.js";
 import type { Downloader, VideoDownloaderInput } from "./types/Downloader.js";
 
 const ytdlp = new YtDlp();
-
-export { VIDEO_DIR_DELIMITER };
 
 class VideoDownloader implements Downloader {
   downloadDirectory: string;

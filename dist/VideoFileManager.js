@@ -1,7 +1,6 @@
 import { readdir, stat } from "node:fs/promises";
 import path from "node:path";
-import { SERVER_URL } from "./config.js";
-import { VIDEO_DIR_DELIMITER } from "./video-constants.js";
+import { SERVER_URL, VIDEO_DIR_DELIMITER } from "./config.js";
 const compareVideoTitles = (a, b) => a.title.localeCompare(b.title, undefined, {
     numeric: true,
     sensitivity: "base",

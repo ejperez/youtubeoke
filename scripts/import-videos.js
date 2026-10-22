@@ -12,7 +12,7 @@ import { constants, randomInt } from "node:crypto";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { DOWNLOAD_DIR } from "../dist/config.js";
-import { VIDEO_DIR_DELIMITER } from "../dist/video-constants.js";
+import { VIDEO_DIR_DELIMITER } from "../dist/config.js";
 
 const VIDEO_ID_ALPHABET =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";

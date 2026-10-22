@@ -4,12 +4,12 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { SERVER_URL } from "../dist/config.js";
-import { VIDEO_DIR_DELIMITER } from "../dist/VideoDownloader.js";
+import { VIDEO_DIR_DELIMITER } from "../dist/config.js";
 import VideoFileManager from "../dist/VideoFileManager.js";
 
 dotenv.config();
 
-const DOWNLOAD_DIR = process.env.DOWNLOAD_DIR || "./downloads";
+const DOWNLOAD_DIR = "downloads";
 
 async function isDirectoryEmpty(dirPath) {
   try {

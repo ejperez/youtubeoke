@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const DOWNLOAD_DIR = process.env.DOWNLOAD_DIR || "./downloads";
+const DOWNLOAD_DIR = "downloads";
 const YTDLP_BINARY = process.env.YTDLP_BINARY || "";
 const FFMPEG_DIR = process.env.FFMPEG_DIR || "";
 

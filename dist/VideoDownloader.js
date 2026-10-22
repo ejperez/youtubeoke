@@ -1,7 +1,6 @@
 import { YtDlp } from "ytdlp-nodejs";
-import { VIDEO_DIR_DELIMITER } from "./video-constants.js";
+import { VIDEO_DIR_DELIMITER } from "./config.js";
 const ytdlp = new YtDlp();
-export { VIDEO_DIR_DELIMITER };
 class VideoDownloader {
     downloadDirectory;
     constructor(downloadDirectory, ffmpegDirectory = "", binaryPath = "") {
