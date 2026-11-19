@@ -1,0 +1,1 @@
+{"version":3,"file":"VideoDownloadQueue.d.ts","sourceRoot":"","sources":["../src/VideoDownloadQueue.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,cAAc,CAAC;AACjC,OAAO,KAAK,EAAE,UAAU,EAAwB,MAAM,uBAAuB,CAAC;AAE9E,cAAM,kBAAkB;;IACtB,UAAU,EAAE,UAAU,CAAC;IACvB,KAAK,EAAE,KAAK,CAAC;IAEb,YAAY,UAAU,EAAE,UAAU,EAGjC;IAED,QAAQ,oBAEP;CA6BF;eAEc,kBAAkB"}
